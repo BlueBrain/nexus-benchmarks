@@ -23,6 +23,30 @@ object BenchError {
       }
   }
 
+  case object UserHomeNotDefined extends BenchError {
+    override def reason: String = "the 'user.home' system property was not defined"
+    override def lines: List[String] = List(
+      "The 'user.home' property is required for determining where the application",
+      "configuration needs to be stored or read from. The JVM automatically detects",
+      "the appropriate value from the provided environment, but in this case it",
+      "could not.",
+      "",
+      s"${Console.GREEN}Solution${Console.RESET}: run the tool again forcing a value ('${Console.CYAN}-Duser.home=${Console.RESET}') to the",
+      "expected system property."
+    )
+  }
+
+  case class IllegalPath(representation: String) extends BenchError {
+    override def reason: String = "a string could not be parsed as a valid path"
+    override def lines: List[String] = List(
+      "The following string could not be parsed as a 'Path':",
+      s"\t'$representation'",
+      "",
+      s"${Console.GREEN}Solution${Console.RESET}: identify the source of this path representation to correct it and",
+      "run the tool again."
+    )
+  }
+
   implicit val serviceErrorShow: Show[BenchError] = Show.show { err =>
     s"""🔥  A service error occurred because '${Console.RED}${err.reason}${Console.RESET}', details:
        |🔥
