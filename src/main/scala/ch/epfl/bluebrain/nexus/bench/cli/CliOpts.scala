@@ -10,6 +10,10 @@ object CliOpts {
   final case class Token(value: String) extends TokenConfig
   final case object NoToken             extends TokenConfig
 
+  final case class EndpointConfig(value: Uri)
+
+  final case class EnvConfig(token: TokenConfig, endpoint: EndpointConfig)
+
   val token: Opts[TokenConfig] = Opts
     .option[String](
       long = "token",
@@ -29,7 +33,7 @@ object CliOpts {
     )
     .map(_ => NoToken)
 
-  val endpoint: Opts[Uri] = Opts
+  val endpoint: Opts[EndpointConfig] = Opts
     .option[String](
       long = "endpoint",
       help = "The base address of the Nexus API",
@@ -37,7 +41,7 @@ object CliOpts {
       metavar = "endpoint"
     )
     .mapValidated { str =>
-      Uri.fromString(str).leftMap(_ => s"Invalid Uri: '$str'").toValidatedNel
+      Uri.fromString(str).map(EndpointConfig).leftMap(_ => s"Invalid Uri: '$str'").toValidatedNel
     }
 
 }
