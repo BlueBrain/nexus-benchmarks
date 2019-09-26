@@ -4,7 +4,7 @@ import java.nio.file.{Path, Paths}
 
 import cats.effect.{Blocker, ContextShift, ExitCode, Sync}
 import cats.implicits._
-import ch.epfl.bluebrain.nexus.bench.BenchConfig.EnvConfig
+import ch.epfl.bluebrain.nexus.bench.BenchConfig.{EnvConfig, TestConfig}
 import ch.epfl.bluebrain.nexus.bench.BenchError.{ConfigurationError, IllegalPath}
 import ch.epfl.bluebrain.nexus.bench.cli.CliOpts._
 import ch.epfl.bluebrain.nexus.bench.{BenchConfig, BenchError}
@@ -43,11 +43,15 @@ class Config[F[_]: ContextShift](blocker: Blocker)(implicit F: Sync[F]) {
 
   def update: Opts[F[ExitCode]] =
     Opts.subcommand("update", "Updates the configuration with the passed arguments") {
-      ((token orElse noToken).orNone, endpoint.orNone).mapN { (tc, ec) =>
+      ((token orElse noToken).orNone, endpoint.orNone, duration.orNone).mapN { (tc, ec, dc) =>
         loadConfig.flatMap { original =>
-          val withTc    = tc.getOrElse(original.env.token)
-          val withEc    = ec.getOrElse(original.env.endpoint)
-          val newConfig = original.copy(env = EnvConfig(withTc, withEc))
+          val withTc = tc.getOrElse(original.env.token)
+          val withEc = ec.getOrElse(original.env.endpoint)
+          val withDc = dc.getOrElse(original.test.duration)
+          val newConfig = original.copy(
+            env = EnvConfig(withTc, withEc),
+            test = TestConfig(withDc)
+          )
           writeConfig(newConfig).as(ExitCode.Success)
         }
       }

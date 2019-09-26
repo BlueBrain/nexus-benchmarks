@@ -3,7 +3,11 @@ package ch.epfl.bluebrain.nexus.bench.cli
 import cats.implicits._
 import ch.epfl.bluebrain.nexus.bench.BenchConfig.{NoToken, Token, TokenConfig}
 import com.monovore.decline._
+import com.typesafe.config.ConfigValueFactory
 import org.http4s.Uri
+import pureconfig.BasicReaders
+
+import scala.concurrent.duration.FiniteDuration
 
 object CliOpts {
 
@@ -34,9 +38,24 @@ object CliOpts {
       metavar = "endpoint"
     )
     .mapValidated { (str: String) =>
-      Uri.fromString(str)
+      Uri
+        .fromString(str)
         .leftMap(_ => s"Invalid Uri: '$str'")
         .ensure(s"Invalid Uri: '$str'")(uri => uri.scheme.isDefined)
+        .toValidatedNel
+    }
+
+  val duration: Opts[FiniteDuration] = Opts
+    .option[String](
+      long = "test-duration",
+      help = "The test execution duration",
+      short = "d",
+      metavar = "test-duration"
+    )
+    .mapValidated { (str: String) =>
+      BasicReaders.finiteDurationConfigReader
+        .from(ConfigValueFactory.fromAnyRef(str))
+        .leftMap(_ => s"Invalid finite duration value '$str', format: '<long><unit>'")
         .toValidatedNel
     }
 
