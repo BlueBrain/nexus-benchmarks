@@ -1,18 +1,11 @@
 package ch.epfl.bluebrain.nexus.bench.cli
 
 import cats.implicits._
+import ch.epfl.bluebrain.nexus.bench.BenchConfig.{NoToken, Token, TokenConfig}
 import com.monovore.decline._
 import org.http4s.Uri
 
 object CliOpts {
-
-  sealed trait TokenConfig
-  final case class Token(value: String) extends TokenConfig
-  final case object NoToken             extends TokenConfig
-
-  final case class EndpointConfig(value: Uri)
-
-  final case class EnvConfig(token: TokenConfig, endpoint: EndpointConfig)
 
   val token: Opts[TokenConfig] = Opts
     .option[String](
@@ -29,19 +22,22 @@ object CliOpts {
     .flag(
       long = "no-token",
       help = "Unset a previously set token",
-      short = "nt"
+      short = "n"
     )
     .map(_ => NoToken)
 
-  val endpoint: Opts[EndpointConfig] = Opts
+  val endpoint: Opts[Uri] = Opts
     .option[String](
       long = "endpoint",
       help = "The base address of the Nexus API",
       short = "e",
       metavar = "endpoint"
     )
-    .mapValidated { str =>
-      Uri.fromString(str).map(EndpointConfig).leftMap(_ => s"Invalid Uri: '$str'").toValidatedNel
+    .mapValidated { (str: String) =>
+      Uri.fromString(str)
+        .leftMap(_ => s"Invalid Uri: '$str'")
+        .ensure(s"Invalid Uri: '$str'")(uri => uri.scheme.isDefined)
+        .toValidatedNel
     }
 
 }

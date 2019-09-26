@@ -4,11 +4,13 @@ import java.nio.file.{Path, Paths}
 
 import cats.effect.{Blocker, ContextShift, ExitCode, Sync}
 import cats.implicits._
+import ch.epfl.bluebrain.nexus.bench.BenchConfig.EnvConfig
 import ch.epfl.bluebrain.nexus.bench.BenchError.{ConfigurationError, IllegalPath}
+import ch.epfl.bluebrain.nexus.bench.cli.CliOpts._
 import ch.epfl.bluebrain.nexus.bench.{BenchConfig, BenchError}
 import com.monovore.decline.Opts
 import com.typesafe.config.ConfigRenderOptions
-import fs2.io
+import fs2.{io, text, Stream}
 import pureconfig.{ConfigObjectSource, ConfigSource, ConfigWriter}
 
 import scala.util.Try
@@ -18,7 +20,7 @@ class Config[F[_]: ContextShift](blocker: Blocker)(implicit F: Sync[F]) {
 
   def subcommand: Opts[F[ExitCode]] =
     Opts.subcommand("config", "Read or write the tool configuration.") {
-      reset orElse show
+      reset orElse show orElse update
     }
 
   def reset: Opts[F[ExitCode]] =
@@ -34,12 +36,44 @@ class Config[F[_]: ContextShift](blocker: Blocker)(implicit F: Sync[F]) {
     Opts.subcommand("show", "Shows the current configuration.") {
       loadConfig
         .flatMap { cfg =>
-          val opts   = ConfigRenderOptions.concise().setComments(false).setJson(false).setFormatted(true)
-          val string = ConfigWriter[BenchConfig].to(cfg).render(opts)
-          F.delay(println(string)).as(ExitCode.Success)
+          F.delay(println(renderConfig(cfg))).as(ExitCode.Success)
         }
         .pure[Opts]
     }
+
+  def update: Opts[F[ExitCode]] =
+    Opts.subcommand("update", "Updates the configuration with the passed arguments") {
+      ((token orElse noToken).orNone, endpoint.orNone).mapN { (tc, ec) =>
+        loadConfig.flatMap { original =>
+          val withTc    = tc.getOrElse(original.env.token)
+          val withEc    = ec.getOrElse(original.env.endpoint)
+          val newConfig = original.copy(env = EnvConfig(withTc, withEc))
+          writeConfig(newConfig).as(ExitCode.Success)
+        }
+      }
+    }
+
+  private def renderConfig(cfg: BenchConfig): String = {
+    val opts = ConfigRenderOptions.concise().setComments(false).setJson(false).setFormatted(true)
+    ConfigWriter[BenchConfig].to(cfg).render(opts)
+  }
+
+  private def writeConfig(cfg: BenchConfig): F[Unit] = {
+    val emptyFile = for {
+      dir  <- configDir
+      _    <- io.file.createDirectories(blocker, dir)
+      file <- configFile
+      _    <- io.file.deleteIfExists(blocker, file)
+    } yield file
+    emptyFile.flatMap { path =>
+      Stream
+        .eval(renderConfig(cfg).pure[F])
+        .through(text.utf8Encode)
+        .through(io.file.writeAll(path, blocker))
+        .compile
+        .drain
+    }
+  }
 
   private def loadConfig: F[BenchConfig] =
     (defaultConfigSource, customConfigSource).mapN((d, c) => c.withFallback(d)).flatMap { source =>

@@ -33,8 +33,8 @@ object BenchConfig {
   }
 
   case class EnvConfig(
-      endpoint: Uri,
-      token: TokenConfig
+      token: TokenConfig,
+      endpoint: Uri
   )
 
   object EnvConfig {
