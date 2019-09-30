@@ -79,7 +79,7 @@ class Config[F[_]: ContextShift](blocker: Blocker)(implicit F: Sync[F]) {
     }
   }
 
-  private def loadConfig: F[BenchConfig] =
+  def loadConfig: F[BenchConfig] =
     (defaultConfigSource, customConfigSource).mapN((d, c) => c.withFallback(d)).flatMap { source =>
       F.fromEither(source.load[BenchConfig].leftMap(failures => ConfigurationError(failures)))
     }
