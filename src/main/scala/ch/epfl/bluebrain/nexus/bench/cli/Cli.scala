@@ -1,6 +1,6 @@
 package ch.epfl.bluebrain.nexus.bench.cli
 
-import cats.effect.{Blocker, ContextShift, ExitCode, Sync}
+import cats.effect.{Blocker, ConcurrentEffect, ContextShift, ExitCode, Sync, Timer}
 import cats.implicits._
 import com.monovore.decline._
 
@@ -12,12 +12,15 @@ object Cli {
       else ExitCode.Success
     }
 
-  def apply[F[_]: Sync: ContextShift](
+  def apply[F[_]: ContextShift: ConcurrentEffect: Timer](
       blocker: Blocker,
       args: List[String],
       env: Map[String, String] = Map.empty
   ): F[ExitCode] =
-    Command("nxb", "Nexus Benchmark Tool")(Config[F](blocker))
-      .parse(args, env)
+    Command("nxb", "Nexus Benchmark Tool") {
+      val cfg  = Config[F](blocker)
+      val load = Load[F](cfg)
+      cfg.subcommand orElse load.subcommand
+    }.parse(args, env)
       .fold(printHelp[F], identity)
 }

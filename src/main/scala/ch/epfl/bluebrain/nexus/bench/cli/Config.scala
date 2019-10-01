@@ -131,6 +131,6 @@ class Config[F[_]: ContextShift](blocker: Blocker)(implicit F: Sync[F]) {
 }
 
 object Config {
-  def apply[F[_]: Sync: ContextShift](blocker: Blocker): Opts[F[ExitCode]] =
-    new Config[F](blocker).subcommand
+  def apply[F[_]: Sync: ContextShift](blocker: Blocker): Config[F] =
+    new Config[F](blocker)
 }

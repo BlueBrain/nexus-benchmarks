@@ -23,6 +23,15 @@ object BenchError {
       }
   }
 
+  case class LoadDistributionNotImplemented(tpe: String) extends BenchError {
+    override val reason: String = s"the load distribution '$tpe' is not yet implemented"
+    override def lines: List[String] = List(
+      s"The load distribution '$tpe' is not yet implemented.",
+      "",
+      s"${Console.GREEN}Solution${Console.RESET}: please use an '${Console.CYAN}exponential${Console.RESET}' load distribution."
+    )
+  }
+
   case object UserHomeNotDefined extends BenchError {
     override def reason: String = "the 'user.home' system property was not defined"
     override def lines: List[String] = List(

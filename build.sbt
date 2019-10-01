@@ -53,6 +53,7 @@ lazy val pureconfig    = "com.github.pureconfig" %% "pureconfig"          % pure
 
 lazy val benchmarks = project
   .in(file("."))
+  .enablePlugins(JavaAppPackaging)
   .settings(addCompilerPlugin(kindProjector))
   .settings(
     name           := "nexus-benchmarks",
