@@ -19,8 +19,6 @@ import scala.util.Random
 
 class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F: ConcurrentEffect[F], T: Timer[F]) {
 
-  private val defaultResourceCount: Int = 4
-
   def subcommand: Opts[F[ExitCode]] =
     Opts.subcommand("load", "Load data into the target system") {
       exec
@@ -31,9 +29,7 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
       cfg.loadConfig.flatMap { bc =>
         withClient(bc.load) { client =>
           bc.load.data match {
-            case Exponential(resources) =>
-              exponential(client, resources, bc) >>
-                F.delay(println(s"Loaded data: $resources")).as(ExitCode.Success)
+            case Exponential(resources) => exponential(client, resources, bc)
             case _: Flat =>
               F.raiseError(LoadDistributionNotImplemented("flat"))
             case _: Linear =>
@@ -52,14 +48,14 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
   private def exponential(client: Client[F], resources: Int, bc: BenchConfig): F[ExitCode] = {
     val exponentialProjectSizes =
       (1 to 100).map { idx =>
-        Math.pow(2d, (idx - 1).toDouble).toInt + defaultResourceCount
+        Math.pow(2d, (idx - 1).toDouble).toInt
       }
     F.delay(println()) >>
       Stream
         .range(1, resources + 1)
         .scan(Cursor(1, 1, 1)) {
           case (Cursor(pidx, residx, _), globalidx) =>
-            if (residx == exponentialProjectSizes(pidx - 1) - defaultResourceCount) Cursor(pidx + 1, 1, globalidx + 1)
+            if (residx == exponentialProjectSizes(pidx - 1)) Cursor(pidx + 1, 1, globalidx + 1)
             else Cursor(pidx, residx + 1, globalidx + 1)
         }
         .through(batch(bc.load.batch))
@@ -90,7 +86,7 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
             F.delay {
               println("Load finished.")
               println(s"Total projects: $pidx.")
-              println(s"Total resources: $globalidx.")
+              println(s"Total resources: ${globalidx - 1}.")
               println(s"Total errors: $errors.")
             } >> F.unit
           case _ => F.unit
