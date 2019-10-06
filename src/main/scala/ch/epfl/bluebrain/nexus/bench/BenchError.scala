@@ -1,6 +1,7 @@
 package ch.epfl.bluebrain.nexus.bench
 
 import cats.Show
+import org.http4s.{Status, Uri}
 import pureconfig.error.ConfigReaderFailures
 
 sealed trait BenchError extends Exception {
@@ -53,6 +54,14 @@ object BenchError {
       "",
       s"${Console.GREEN}Solution${Console.RESET}: identify the source of this path representation to correct it and",
       "run the tool again."
+    )
+  }
+
+  case class UnableToCreateResource(uri: Uri, expected: Set[Status], actual: Status) extends BenchError {
+    override def reason: String = s"unable to create resource at ${uri.renderString}"
+    override def lines: List[String] = List(
+      s"The server did not return one of the expected status codes (${expected.map(_.renderString).mkString(", ")})",
+      s"but ${actual.renderString}."
     )
   }
 

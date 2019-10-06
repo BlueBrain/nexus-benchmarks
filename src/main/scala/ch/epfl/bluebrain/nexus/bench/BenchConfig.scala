@@ -2,7 +2,8 @@ package ch.epfl.bluebrain.nexus.bench
 
 import cats.implicits._
 import ch.epfl.bluebrain.nexus.bench.BenchConfig._
-import org.http4s.Uri
+import org.http4s.{AuthScheme, Credentials, Uri}
+import org.http4s.headers.Authorization
 import pureconfig.error.{CannotConvert, ConvertFailure}
 import pureconfig.generic.semiauto._
 import pureconfig.syntax._
@@ -18,7 +19,13 @@ case class BenchConfig(
 
 object BenchConfig {
 
-  sealed trait TokenConfig
+  sealed trait TokenConfig {
+    def authorization: Option[Authorization] =
+      this match {
+        case Token(value) => Some(Authorization(Credentials.Token(AuthScheme.Bearer, value)))
+        case NoToken      => None
+      }
+  }
   case class Token(value: String) extends TokenConfig
   case object NoToken             extends TokenConfig
 

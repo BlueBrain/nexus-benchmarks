@@ -60,6 +60,8 @@ lazy val benchmarks = project
     organization   := "ch.epfl.bluebrain.nexus",
     scalaVersion   := "2.13.1",
     publish / skip := true,
+    run / fork     := true,
+    scalacOptions --= Seq("-Xfatal-warnings"),
     libraryDependencies := Seq(
       catsCore,
       circeCore,
