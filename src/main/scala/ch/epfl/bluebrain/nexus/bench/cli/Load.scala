@@ -16,7 +16,7 @@ import org.http4s.client.Client
 import org.http4s.client.blaze._
 import org.http4s.client.dsl.Http4sClientDsl
 import org.http4s.headers._
-import org.http4s.{MediaType, Status}
+import org.http4s.{EntityDecoder, MediaType, Status}
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.ExecutionContext.global
@@ -90,29 +90,33 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
         }
         .through(batch(bc.load.batch))
         .mapAsync(bc.load.concurrency) { b =>
-          loadBatch(client, b, bc.env, res).map {
+          loadBatch(client, b, bc, res).map {
             case Status.Created | Status.Conflict => (b, 0)
             case _                                => (b, 1)
           }
         }
-        .mapAccumulate(0) {
-          case (errors, (batch, newErrors)) =>
-            val progress = batch.toProgress(errors + newErrors)
-            (errors + newErrors, progress)
+        .mapAccumulate((0, System.currentTimeMillis())) {
+          case ((errors, start), (batch, newErrors)) =>
+            val progress = batch.toProgress(errors + newErrors, start)
+            ((errors + newErrors, start), progress)
         }
         .debounce(500.millis)
         .mapAsync(1) {
-          case (_, progress @ Progress(projectIdx, resourceIdx, globalIdx, errors)) =>
+          case (_, progress @ Progress(projectIdx, resourceIdx, globalIdx, errors, start)) =>
             F.delay {
               erasePreviousLine()
-              println(s"Project $projectIdx - resources: $resourceIdx, total: $globalIdx, errors: $errors")
+              val elapsed = (System.currentTimeMillis() - start) / 1000 //seconds
+              val rate    = globalIdx / elapsed
+              println(
+                s"Project $projectIdx - resources: $resourceIdx, total: $globalIdx, errors: $errors, rate: $rate / sec, elapsed: $elapsed sec"
+              )
               progress
             }
         }
         .compile
         .last
         .flatMap {
-          case Some(Progress(pidx, _, globalidx, errors)) =>
+          case Some(Progress(pidx, _, globalidx, errors, _)) =>
             F.delay {
               println("Load finished.")
               println(s"Total projects: $pidx.")
@@ -141,11 +145,12 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
     in => go(in.chunkN(max, allowFewer = true)).stream
   }
 
-  private def loadBatch(client: Client[F], batch: Batch, env: EnvConfig, res: Json): F[Status] = {
+  private def loadBatch(client: Client[F], batch: Batch, bc: BenchConfig, res: Json): F[Status] = {
     val collectionSchema = "https://bluebrain.github.io/nexus/schemas/collection.json"
-    val uri              = env.endpoint / "resources" / "bench" / s"project${batch.projectIdx}" / collectionSchema
+    val uri              = bc.env.endpoint / "resources" / "bench" / s"project${batch.projectIdx}" / collectionSchema
     val body =
       Json.obj(
+        "@type" -> Json.fromString("ResourceCollection"),
         "resources" -> Json.fromValues(
           batch.resourceIdxs.map { idx =>
             Json.obj(
@@ -156,11 +161,25 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
           }
         )
       )
-    val req = env.token.authorization match {
-      case Some(auth) => POST(body, uri, auth, accept)
-      case None       => POST(body, uri, accept)
+    val finalUri = uri.withQueryParam("skipValidation", !bc.load.validate)
+    val req = bc.env.token.authorization match {
+      case Some(auth) => POST(body, finalUri, auth, accept)
+      case None       => POST(body, finalUri, accept)
     }
-    client.status(req)
+    client.fetch(req) { resp =>
+      implicitly[EntityDecoder[F, Json]]
+        .decode(resp, strict = false)
+        .value
+        .map {
+          case Left(fail) if !resp.status.isSuccess =>
+            println(fail)
+            resp.status
+          case Right(json) if !resp.status.isSuccess =>
+            println(json.spaces2)
+            resp.status
+          case _ => resp.status
+        }
+    }
   }
 
   private def createOrg(env: EnvConfig, client: Client[F]): F[Unit] = {
@@ -220,8 +239,8 @@ object Load {
   case class Batch(projectIdx: Int, resourceIdxs: Vector[Int], globalIdx: Int) {
     def add(cursor: Cursor): Batch =
       copy(resourceIdxs = resourceIdxs :+ cursor.resourceIdx, globalIdx = cursor.globalIdx)
-    def toProgress(errors: Int): Progress =
-      Progress(projectIdx, resourceIdxs.lastOption.getOrElse(0), globalIdx, errors)
+    def toProgress(errors: Int, start: Long): Progress =
+      Progress(projectIdx, resourceIdxs.lastOption.getOrElse(0), globalIdx, errors, start)
   }
-  case class Progress(projectIdx: Int, resourceIdx: Int, globalIdx: Int, errors: Int)
+  case class Progress(projectIdx: Int, resourceIdx: Int, globalIdx: Int, errors: Int, start: Long)
 }
