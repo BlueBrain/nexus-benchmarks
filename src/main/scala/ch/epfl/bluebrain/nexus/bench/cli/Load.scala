@@ -83,7 +83,7 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
 
     def resourceStream: F[Unit] =
       Stream
-        .range(start, resources + 1)
+        .range(1, resources + 1)
         .scan(Cursor(1, 1, 1)) {
           case (Cursor(pidx, residx, _), globalidx) =>
             if (residx == exponentialProjectSizes(pidx - 1)) Cursor(pidx + 1, 1, globalidx + 1)
@@ -98,9 +98,9 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
           }
         }
         .mapAccumulate((0, System.currentTimeMillis())) {
-          case ((errors, start), (batch, newErrors)) =>
-            val progress = batch.toProgress(errors + newErrors, start)
-            ((errors + newErrors, start), progress)
+          case ((errors, startTs), (batch, newErrors)) =>
+            val progress = batch.toProgress(errors + newErrors, startTs)
+            ((errors + newErrors, startTs), progress)
         }
         .debounce(500.millis)
         .mapAsync(1) {
@@ -241,8 +241,8 @@ object Load {
   case class Batch(projectIdx: Int, resourceIdxs: Vector[Int], globalIdx: Int) {
     def add(cursor: Cursor): Batch =
       copy(resourceIdxs = resourceIdxs :+ cursor.resourceIdx, globalIdx = cursor.globalIdx)
-    def toProgress(errors: Int, start: Long): Progress =
-      Progress(projectIdx, resourceIdxs.lastOption.getOrElse(0), globalIdx, errors, start)
+    def toProgress(errors: Int, startTs: Long): Progress =
+      Progress(projectIdx, resourceIdxs.lastOption.getOrElse(0), globalIdx, errors, startTs)
   }
   case class Progress(projectIdx: Int, resourceIdx: Int, globalIdx: Int, errors: Int, start: Long)
 }
