@@ -22,7 +22,9 @@ import scala.concurrent.ExecutionContext
 import scala.concurrent.ExecutionContext.global
 import scala.concurrent.duration._
 import CliOpts._
+
 import scala.io.Source
+import scala.util.control.NonFatal
 
 //noinspection DuplicatedCode
 class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F: ConcurrentEffect[F], T: Timer[F]) {
@@ -92,10 +94,11 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
         .through(batch(bc.load.batch))
         .mapAsync[F, (Batch, Int)](bc.load.concurrency) { b =>
           if (b.globalIdx < start) F.pure((b, 0)) // skip batch until the global index reaches the start idx
-          else loadBatch(client, b, bc, res).map {
-            case Status.Created | Status.Conflict => (b, 0)
-            case _                                => (b, 1)
-          }
+          else
+            loadBatch(client, b, bc, res).map {
+              case Status.Created | Status.Conflict => (b, 0)
+              case _                                => (b, 1)
+            }
         }
         .mapAccumulate((0, System.currentTimeMillis())) {
           case ((errors, startTs), (batch, newErrors)) =>
@@ -168,7 +171,7 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
       case Some(auth) => POST(body, finalUri, auth, accept)
       case None       => POST(body, finalUri, accept)
     }
-    client.fetch(req) { resp =>
+    val fa = client.fetch(req) { resp =>
       implicitly[EntityDecoder[F, Json]]
         .decode(resp, strict = false)
         .value
@@ -182,6 +185,7 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
           case _ => resp.status
         }
     }
+    retry(fa, 20)
   }
 
   private def createOrg(env: EnvConfig, client: Client[F]): F[Unit] = {
@@ -224,6 +228,26 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
     print("                                                                                                          ")
     print("\u001b[1000D")
     Console.flush()
+  }
+
+  private def retry[A](fa: F[A], max: Int): F[A] = {
+    def inner(remaining: Int): F[A] =
+      fa.handleErrorWith {
+        case NonFatal(th) if remaining > 0 =>
+          F.delay(
+            println(s"An error has occurred: ${th.getClass.getSimpleName}, retrying ($remaining retries left)...")
+          ) >>
+            T.sleep(500.millis) >>
+            inner(remaining - 1)
+        case NonFatal(th) =>
+          F.delay(
+            println(
+              s"An error has occurred: ${th.getClass.getSimpleName}, but reached max retries ($max), giving up..."
+            )
+          ) >>
+            F.raiseError(th)
+      }
+    inner(max)
   }
 
   private val accept = Accept(MediaType.application.json)
