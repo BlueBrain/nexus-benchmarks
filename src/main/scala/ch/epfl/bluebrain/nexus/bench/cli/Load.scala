@@ -21,6 +21,7 @@ import org.http4s.{EntityDecoder, MediaType, Status}
 import scala.concurrent.ExecutionContext
 import scala.concurrent.ExecutionContext.global
 import scala.concurrent.duration._
+import CliOpts._
 import scala.io.Source
 
 //noinspection DuplicatedCode
@@ -32,12 +33,12 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
     }
 
   def exec: Opts[F[ExitCode]] =
-    Opts.apply {
+    startIdx.withDefault(1).map { si =>
       cfg.loadConfig.flatMap { bc =>
         withClient(bc.load) { client =>
           loadResource().flatMap { res =>
             bc.load.data match {
-              case Exponential(resources) => exponential(client, resources, bc, res)
+              case Exponential(resources) => exponential(client, resources, bc, res, si)
               case _: Flat =>
                 F.raiseError(LoadDistributionNotImplemented("flat"))
               case _: Linear =>
@@ -57,7 +58,7 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
       .resource
       .use(f)
 
-  private def exponential(client: Client[F], resources: Int, bc: BenchConfig, res: Json): F[ExitCode] = {
+  private def exponential(client: Client[F], resources: Int, bc: BenchConfig, res: Json, start: Int): F[ExitCode] = {
     val exponentialProjectSizes =
       (1 to 100).map { idx =>
         Math.pow(2d, (idx - 1).toDouble).toInt
@@ -82,15 +83,16 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
 
     def resourceStream: F[Unit] =
       Stream
-        .range(1, resources + 1)
+        .range(start, resources + 1)
         .scan(Cursor(1, 1, 1)) {
           case (Cursor(pidx, residx, _), globalidx) =>
             if (residx == exponentialProjectSizes(pidx - 1)) Cursor(pidx + 1, 1, globalidx + 1)
             else Cursor(pidx, residx + 1, globalidx + 1)
         }
         .through(batch(bc.load.batch))
-        .mapAsync(bc.load.concurrency) { b =>
-          loadBatch(client, b, bc, res).map {
+        .mapAsync[F, (Batch, Int)](bc.load.concurrency) { b =>
+          if (b.globalIdx < start) F.pure((b, 0)) // skip batch until the global index reaches the start idx
+          else loadBatch(client, b, bc, res).map {
             case Status.Created | Status.Conflict => (b, 0)
             case _                                => (b, 1)
           }
@@ -102,11 +104,11 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
         }
         .debounce(500.millis)
         .mapAsync(1) {
-          case (_, progress @ Progress(projectIdx, resourceIdx, globalIdx, errors, start)) =>
+          case (_, progress @ Progress(projectIdx, resourceIdx, globalIdx, errors, startTs)) =>
             F.delay {
               erasePreviousLine()
-              val elapsed = (System.currentTimeMillis() - start) / 1000 //seconds
-              val rate    = globalIdx / elapsed
+              val elapsed = (System.currentTimeMillis() - startTs) / 1000 //seconds
+              val rate    = if (globalIdx < start) 0 else (globalIdx - start) / elapsed
               println(
                 s"Project $projectIdx - resources: $resourceIdx, total: $globalIdx, errors: $errors, rate: $rate / sec, elapsed: $elapsed sec"
               )

@@ -59,4 +59,13 @@ object CliOpts {
         .toValidatedNel
     }
 
+  val startIdx: Opts[Int] = Opts
+    .option[Int](
+      long = "start-index",
+      help = "The resource index to be used as a starting point; the load op will continue from this index.",
+      short = "s",
+      metavar = "1 to resource count"
+    )
+    .validate(s"Start index must be a strictly positive integer")(_ > 0)
+
 }
