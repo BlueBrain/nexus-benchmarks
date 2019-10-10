@@ -20,7 +20,8 @@ object Cli {
     Command("nxb", "Nexus Benchmark Tool") {
       val cfg  = Config[F](blocker)
       val load = Load[F](cfg)
-      cfg.subcommand orElse load.subcommand
+      val test = Test[F]
+      cfg.subcommand orElse load.subcommand orElse test.subcommand
     }.parse(args, env)
       .fold(printHelp[F], identity)
 }

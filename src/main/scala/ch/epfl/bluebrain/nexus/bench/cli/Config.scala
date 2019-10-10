@@ -10,7 +10,7 @@ import ch.epfl.bluebrain.nexus.bench.cli.CliOpts._
 import ch.epfl.bluebrain.nexus.bench.{BenchConfig, BenchError}
 import com.monovore.decline.Opts
 import com.typesafe.config.ConfigRenderOptions
-import fs2.{io, text, Stream}
+import fs2.{Stream, io, text}
 import pureconfig.{ConfigObjectSource, ConfigSource, ConfigWriter}
 
 import scala.util.Try
@@ -43,14 +43,24 @@ class Config[F[_]: ContextShift](blocker: Blocker)(implicit F: Sync[F]) {
 
   def update: Opts[F[ExitCode]] =
     Opts.subcommand("update", "Updates the configuration with the passed arguments") {
-      ((token orElse noToken).orNone, endpoint.orNone, duration.orNone).mapN { (tc, ec, dc) =>
+      (
+        (token orElse noToken).orNone,
+        endpoint.orNone,
+        duration.orNone,
+        org.orNone,
+        users.orNone,
+        project.orNone
+      ).mapN { (tc, ec, dc, oc, uc, pc) =>
         loadConfig.flatMap { original =>
           val withTc = tc.getOrElse(original.env.token)
           val withEc = ec.getOrElse(original.env.endpoint)
+          val withOc = oc.getOrElse(original.env.org)
           val withDc = dc.getOrElse(original.test.duration)
+          val withUc = uc.getOrElse(original.test.users)
+          val withPc = pc.getOrElse(original.test.project)
           val newConfig = original.copy(
-            env = EnvConfig(withTc, withEc),
-            test = TestConfig(withDc)
+            env = EnvConfig(withTc, withEc, withOc),
+            test = TestConfig(withDc, withUc, withPc)
           )
           writeConfig(newConfig).as(ExitCode.Success)
         }
@@ -95,23 +105,11 @@ class Config[F[_]: ContextShift](blocker: Blocker)(implicit F: Sync[F]) {
       )
     }
 
-//  private def configStringFromFile(path: Path): F[Option[String]] =
-//    fileExists(path).ifM(readEntireFile(path).map(Some.apply), F.pure(None))
-
   private def fileExists(path: Path): F[Boolean] =
     blocker.delay {
       val file = path.toFile
       file.exists() && file.isFile
     }
-
-//  private def readEntireFile(path: Path): F[String] =
-//    io.file
-//      .readAll(path, blocker, 4096)
-//      .through(text.utf8Decode)
-//      .through(text.lines)
-//      .compile
-//      .fold(new StringBuilder)((builder, str) => builder.append(str))
-//      .map(_.toString())
 
   private def configDir: F[Path] = {
     def homeStringFromProps =

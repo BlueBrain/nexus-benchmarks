@@ -42,7 +42,8 @@ object BenchConfig {
 
   case class EnvConfig(
       token: TokenConfig,
-      endpoint: Uri
+      endpoint: Uri,
+      org: String
   )
 
   object EnvConfig {
@@ -116,7 +117,11 @@ object BenchConfig {
       deriveConvert[LoadConfig]
   }
 
-  case class TestConfig(duration: FiniteDuration)
+  case class TestConfig(
+      duration: FiniteDuration,
+      users: Int,
+      project: String
+  )
 
   object TestConfig {
     implicit val testConfigConvert: ConfigConvert[TestConfig] =

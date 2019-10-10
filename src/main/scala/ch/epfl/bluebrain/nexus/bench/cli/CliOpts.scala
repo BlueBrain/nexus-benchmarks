@@ -45,6 +45,15 @@ object CliOpts {
         .toValidatedNel
     }
 
+  val org: Opts[String] = Opts
+    .option[String](
+      long = "org",
+      help = "The organization to be used for loading data and running tests",
+      short = "o",
+      metavar = "org"
+    )
+    .validate("Invalid organization label")(_.matches("[a-zA-Z0-9]{1,16}"))
+
   val duration: Opts[FiniteDuration] = Opts
     .option[String](
       long = "test-duration",
@@ -58,6 +67,24 @@ object CliOpts {
         .leftMap(_ => s"Invalid finite duration value '$str', format: '<long><unit>'")
         .toValidatedNel
     }
+
+  val users: Opts[Int] = Opts
+    .option[Int](
+      long = "users",
+      help = "The number of logical threads to be used in tests",
+      short = "u",
+      metavar = "users"
+    )
+    .validate("The users value must be in the interval [1, 200]")(u => u > 0 && u <= 200)
+
+  val project: Opts[String] = Opts
+    .option[String](
+      long = "project",
+      help = "The project to be used for running tests",
+      short = "p",
+      metavar = "project"
+    )
+    .validate("Invalid project label")(_.matches("[a-zA-Z0-9]{1,16}"))
 
   val startIdx: Opts[Int] = Opts
     .option[Int](

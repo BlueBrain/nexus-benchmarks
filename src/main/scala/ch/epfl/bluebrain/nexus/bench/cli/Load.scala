@@ -5,7 +5,6 @@ import cats.implicits._
 import ch.epfl.bluebrain.nexus.bench.BenchConfig
 import ch.epfl.bluebrain.nexus.bench.BenchConfig.{EnvConfig, Exponential, Flat, Linear, LoadConfig}
 import ch.epfl.bluebrain.nexus.bench.BenchError.{LoadDistributionNotImplemented, UnableToCreateResource}
-import ch.epfl.bluebrain.nexus.bench.cli.Load.{Batch, Cursor, Progress}
 import com.monovore.decline.Opts
 import io.circe.Json
 import io.circe.parser._
@@ -17,12 +16,12 @@ import org.http4s.client.blaze._
 import org.http4s.client.dsl.Http4sClientDsl
 import org.http4s.headers._
 import org.http4s.{EntityDecoder, MediaType, Status}
+import ch.epfl.bluebrain.nexus.bench.cli.CliOpts._
+import ch.epfl.bluebrain.nexus.bench.cli.Load.{Batch, Cursor, Progress, _}
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.ExecutionContext.global
 import scala.concurrent.duration._
-import CliOpts._
-
 import scala.io.Source
 import scala.util.control.NonFatal
 
@@ -152,14 +151,15 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
 
   private def loadBatch(client: Client[F], batch: Batch, bc: BenchConfig, res: Json): F[Status] = {
     val collectionSchema = "https://bluebrain.github.io/nexus/schemas/collection.json"
-    val uri              = bc.env.endpoint / "resources" / "bench" / s"project${batch.projectIdx}" / collectionSchema
+    val uri              = bc.env.endpoint / "resources" / bc.env.org / s"project${batch.projectIdx}" / collectionSchema
     val body =
       Json.obj(
         "@type" -> Json.fromString("ResourceCollection"),
         "resources" -> Json.fromValues(
           batch.resourceIdxs.map { idx =>
+
             Json.obj(
-              "resourceId" -> Json.fromString(s"https://nexus-sandbox.io/bench/resource$idx"),
+              "resourceId" -> Json.fromString(s"$resourceBase$idx"),
               "schema"     -> Json.fromString("https://neuroshapes.org/dash/stimulusexperiment"),
               "resource"   -> res
             )
@@ -189,7 +189,7 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
   }
 
   private def createOrg(env: EnvConfig, client: Client[F]): F[Unit] = {
-    val uri  = env.endpoint / "orgs" / "bench"
+    val uri  = env.endpoint / "orgs" / env.org
     val body = Json.obj()
     val req = env.token.authorization match {
       case Some(auth) => PUT(body, uri, auth, accept)
@@ -202,7 +202,7 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
   }
 
   private def createProject(idx: Int, env: EnvConfig, client: Client[F]): F[Unit] = {
-    val uri  = env.endpoint / "projects" / "bench" / s"project$idx"
+    val uri  = env.endpoint / "projects" / env.org / s"project$idx"
     val body = Json.obj()
     val req = env.token.authorization match {
       case Some(auth) => PUT(body, uri, auth, accept)
@@ -269,4 +269,6 @@ object Load {
       Progress(projectIdx, resourceIdxs.lastOption.getOrElse(0), globalIdx, errors, startTs)
   }
   case class Progress(projectIdx: Int, resourceIdx: Int, globalIdx: Int, errors: Int, start: Long)
+
+  val resourceBase: String = "https://nexus-sandbox.io/bench/resource"
 }
