@@ -6,13 +6,18 @@ import io.gatling.http.Predef._
 //noinspection TypeAnnotation
 class ReadSimulation extends BaseSimulation {
 
+  val resourceIds = Iterator
+    .range(1, config.test.maxResourceIndex)
+    .map(idx => Map("resourceId" -> s"$base/resources/$org/$project/_/${encodedResBase}${idx}"))
+
   val scn = scenario("ReadSimulation")
     .forever {
-      exec(
-        http("getById")
-          .get(s"$base/resources/$org/$project/_/${encodedResBase}1")
-          .check(status.in(200, 404))
-      )
+      feed(resourceIds)
+        .exec {
+          http("getById")
+            .get("${resourceId}")
+            .check(status.in(200, 404))
+        }
     }
 
   setupSimulation(scn)

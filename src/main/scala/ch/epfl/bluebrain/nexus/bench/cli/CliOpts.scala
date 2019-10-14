@@ -86,6 +86,14 @@ object CliOpts {
     )
     .validate("Invalid project label")(_.matches("[a-zA-Z0-9]{1,16}"))
 
+  val maxResourceIndex: Opts[Int] = Opts
+    .option[Int](
+      long = "max-resource-index",
+      help = "The maximum resource index to be used for reads when cycling through resources",
+      metavar = "max-resource-index"
+    )
+    .validate("The max-resource-index value must be in the interval [1, 10000000]")(u => u > 0 && u <= 10000000)
+
   val startIdx: Opts[Int] = Opts
     .option[Int](
       long = "start-index",

@@ -10,7 +10,7 @@ import ch.epfl.bluebrain.nexus.bench.cli.CliOpts._
 import ch.epfl.bluebrain.nexus.bench.{BenchConfig, BenchError}
 import com.monovore.decline.Opts
 import com.typesafe.config.ConfigRenderOptions
-import fs2.{Stream, io, text}
+import fs2.{io, text, Stream}
 import pureconfig.{ConfigObjectSource, ConfigSource, ConfigWriter}
 
 import scala.util.Try
@@ -49,18 +49,20 @@ class Config[F[_]: ContextShift](blocker: Blocker)(implicit F: Sync[F]) {
         duration.orNone,
         org.orNone,
         users.orNone,
-        project.orNone
-      ).mapN { (tc, ec, dc, oc, uc, pc) =>
+        project.orNone,
+        maxResourceIndex.orNone
+      ).mapN { (tc, ec, dc, oc, uc, pc, mric) =>
         loadConfig.flatMap { original =>
-          val withTc = tc.getOrElse(original.env.token)
-          val withEc = ec.getOrElse(original.env.endpoint)
-          val withOc = oc.getOrElse(original.env.org)
-          val withDc = dc.getOrElse(original.test.duration)
-          val withUc = uc.getOrElse(original.test.users)
-          val withPc = pc.getOrElse(original.test.project)
+          val withTc   = tc.getOrElse(original.env.token)
+          val withEc   = ec.getOrElse(original.env.endpoint)
+          val withOc   = oc.getOrElse(original.env.org)
+          val withDc   = dc.getOrElse(original.test.duration)
+          val withUc   = uc.getOrElse(original.test.users)
+          val withPc   = pc.getOrElse(original.test.project)
+          val withMric = mric.getOrElse(original.test.maxResourceIndex)
           val newConfig = original.copy(
             env = EnvConfig(withTc, withEc, withOc),
-            test = TestConfig(withDc, withUc, withPc)
+            test = TestConfig(withDc, withUc, withPc, withMric)
           )
           writeConfig(newConfig).as(ExitCode.Success)
         }

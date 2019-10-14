@@ -120,7 +120,8 @@ object BenchConfig {
   case class TestConfig(
       duration: FiniteDuration,
       users: Int,
-      project: String
+      project: String,
+      maxResourceIndex: Int
   )
 
   object TestConfig {
