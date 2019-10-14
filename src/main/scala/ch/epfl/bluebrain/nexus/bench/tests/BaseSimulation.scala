@@ -5,6 +5,7 @@ import java.net.URLEncoder
 import cats.effect.{Blocker, ConcurrentEffect}
 import ch.epfl.bluebrain.nexus.bench.BenchConfig
 import ch.epfl.bluebrain.nexus.bench.cli.{Config, Load}
+import io.circe.Json
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ScenarioBuilder
 import io.gatling.http.Predef._
@@ -20,9 +21,14 @@ abstract class BaseSimulation extends Simulation {
   private implicit lazy val catsEffect: ConcurrentEffect[Task] =
     new CatsConcurrentEffectForTask()(scheduler, options)
 
-  val config: BenchConfig = Blocker[Task]
+  val (config: BenchConfig, resource: Json) = Blocker[Task]
     .use { blocker =>
-      Config[Task](blocker).loadConfig
+      val cfg  = Config[Task](blocker)
+      val load = Load[Task](cfg)
+      for {
+        bc  <- cfg.loadConfig
+        res <- load.loadResource()
+      } yield (bc, res)
     }
     .runSyncUnsafe()
 

@@ -214,7 +214,7 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
     }
   }
 
-  private def loadResource(): F[Json] =
+  def loadResource(): F[Json] =
     F.delay {
         Source.fromInputStream(getClass.getClassLoader.getResourceAsStream("data/stimulusexperiment.json"), "UTF-8")
       }

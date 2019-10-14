@@ -3,14 +3,13 @@
     "http://www.w3.org/ns/prov#Activity",
     "https://neuroshapes.org/StimulusExperiment"
   ],
-  "http://www.w3.org/ns/prov#endedAtTime": "2019-04-29T23:59:00",
-  "http://www.w3.org/ns/prov#startedAtTime": "2019-04-29T00:00:00",
   "http://www.w3.org/ns/prov#used": {
     "@id": "https://nexus-sandbox.io/neurosciencegraph/data/049b569d-98ba-4a54-a9cb-45f5c5cd3b40",
     "@type": [
       "http://www.w3.org/ns/prov#Entity",
       "https://neuroshapes.org/PatchedCell"
-    ]
+    ],
+    "http://schema.org/name": "Some PatchedCell"
   },
   "http://www.w3.org/ns/prov#wasAssociatedWith": {
     "@id": "https://nexus-sandbox.io/v1/realms/random/users/someuser",
@@ -22,7 +21,8 @@
       "https://neuroshapes.org/Protocol",
       "https://neuroshapes.org/ExperimentalProtocol",
       "http://www.w3.org/ns/prov#Entity"
-    ]
+    ],
+    "http://schema.org/name": "Some Protocol"
   },
   "https://neuroshapes.org/stimulus": {
     "https://neuroshapes.org/stimulusType": {
