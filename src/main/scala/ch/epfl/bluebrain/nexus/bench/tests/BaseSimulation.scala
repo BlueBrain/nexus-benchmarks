@@ -37,6 +37,8 @@ abstract class BaseSimulation extends Simulation {
   val project: String        = config.test.project
   val encodedResBase: String = encode(Load.resourceBase)
 
+  val encodedSchemaId: String = encode("https://neuroshapes.org/dash/stimulusexperiment")
+
   val httpProtocol: HttpProtocolBuilder = http.baseUrl(base)
 
   def encode(str: String): String =

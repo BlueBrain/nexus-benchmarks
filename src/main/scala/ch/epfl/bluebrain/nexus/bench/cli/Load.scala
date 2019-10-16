@@ -146,7 +146,8 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
           Pull.output(Chunk.iterable(batches.reverse)) >> go(tl)
         case None => Pull.done
       }
-    in => go(in.chunkN(max, allowFewer = true)).stream
+    in =>
+      go(in.chunkN(max, allowFewer = true)).stream
   }
 
   private def loadBatch(client: Client[F], batch: Batch, bc: BenchConfig, res: Json): F[Status] = {
@@ -157,7 +158,6 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
         "@type" -> Json.fromString("ResourceCollection"),
         "resources" -> Json.fromValues(
           batch.resourceIdxs.map { idx =>
-
             Json.obj(
               "resourceId" -> Json.fromString(s"$resourceBase$idx"),
               "schema"     -> Json.fromString("https://neuroshapes.org/dash/stimulusexperiment"),

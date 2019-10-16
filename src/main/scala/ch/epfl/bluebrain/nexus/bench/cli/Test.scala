@@ -2,7 +2,12 @@ package ch.epfl.bluebrain.nexus.bench.cli
 
 import cats.effect.{ExitCode, Sync}
 import cats.implicits._
-import ch.epfl.bluebrain.nexus.bench.tests.{CreateNoValidationSimulation, CreateSimulation, ReadSimulation, ReadSourceSimulation}
+import ch.epfl.bluebrain.nexus.bench.tests.{
+  CreateNoValidationSimulation,
+  CreateSimulation,
+  ReadSimulation,
+  ReadSourceSimulation
+}
 import com.monovore.decline.Opts
 import io.gatling.SimulationRunner
 

@@ -7,13 +7,12 @@ import io.gatling.http.Predef._
 class CreateSimulation extends BaseSimulation {
 
   val stringResource = resource.noSpaces
-  val schema = encode("https://neuroshapes.org/dash/stimulusexperiment")
 
   val scn = scenario("CreateSimulation")
     .forever {
       exec {
         http("createResource")
-          .post(s"$base/resources/$org/$project/$schema/")
+          .post(s"$base/resources/$org/$project/$encodedSchemaId/")
           .body(StringBody(stringResource))
           .header(HttpHeaderNames.ContentType, HttpHeaderValues.ApplicationJson)
           .check(status.in(201))
