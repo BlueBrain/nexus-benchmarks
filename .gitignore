@@ -58,3 +58,5 @@ rules.log
 # temporary attachments #
 # #######################
 tmp/
+
+results
