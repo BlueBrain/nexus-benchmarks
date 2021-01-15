@@ -12,7 +12,7 @@ class CreateSimulation extends BaseSimulation {
     .forever {
       exec {
         http("createResource")
-          .post(s"$base/resources/$org/$project/$encodedSchemaId/")
+          .post(s"/resources/$org/$project/$encodedSchemaId/")
           .body(StringBody(stringResource))
           .header(HttpHeaderNames.ContentType, HttpHeaderValues.ApplicationJson)
           .check(status.in(201))

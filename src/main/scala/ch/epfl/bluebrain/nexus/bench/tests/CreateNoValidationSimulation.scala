@@ -12,7 +12,7 @@ class CreateNoValidationSimulation extends BaseSimulation {
     .forever {
       exec {
         http("createResource")
-          .post(s"$base/resources/$org/$project/")
+          .post(s"/resources/$org/$project/")
           .body(StringBody(stringResource))
           .header(HttpHeaderNames.ContentType, HttpHeaderValues.ApplicationJson)
           .check(status.in(201))

@@ -39,7 +39,7 @@ abstract class BaseSimulation extends Simulation {
 
   val encodedSchemaId: String = encode("https://neuroshapes.org/dash/stimulusexperiment")
 
-  val httpProtocol: HttpProtocolBuilder = http.baseUrl(base)
+  val httpProtocol: HttpProtocolBuilder = http.baseUrls(config.env.endpoints)
 
   def encode(str: String): String =
     URLEncoder.encode(str, "UTF-8")
