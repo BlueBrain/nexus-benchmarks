@@ -43,8 +43,12 @@ object BenchConfig {
   case class EnvConfig(
       token: TokenConfig,
       endpoint: Uri,
-      org: String
-  )
+      org: String,
+      alternateEndpoints: Set[Uri] = Set.empty
+  ) {
+    def endpoints: List[String] =
+      (alternateEndpoints + endpoint).map(_.renderString).toList
+  }
 
   object EnvConfig {
     implicit val uriConfigReader: ConfigReader[Uri] =
@@ -110,7 +114,7 @@ object BenchConfig {
       }
   }
 
-  case class LoadConfig(concurrency: Int, batch: Int, validate: Boolean, data: DataConfig)
+  case class LoadConfig(concurrency: Int, validate: Boolean, data: DataConfig)
 
   object LoadConfig {
     implicit val loadConfigConvert: ConfigConvert[LoadConfig] =

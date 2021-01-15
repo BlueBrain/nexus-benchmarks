@@ -17,7 +17,7 @@ import org.http4s.client.dsl.Http4sClientDsl
 import org.http4s.headers._
 import org.http4s.{EntityDecoder, MediaType, Status}
 import ch.epfl.bluebrain.nexus.bench.cli.CliOpts._
-import ch.epfl.bluebrain.nexus.bench.cli.Load.{Batch, Cursor, Progress, _}
+import ch.epfl.bluebrain.nexus.bench.cli.Load._
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.ExecutionContext.global
@@ -90,18 +90,20 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
             if (residx == exponentialProjectSizes(pidx - 1)) Cursor(pidx + 1, 1, globalidx + 1)
             else Cursor(pidx, residx + 1, globalidx + 1)
         }
-        .through(batch(bc.load.batch))
-        .mapAsync[F, (Batch, Int)](bc.load.concurrency) { b =>
-          if (b.globalIdx < start) F.pure((b, 0)) // skip batch until the global index reaches the start idx
-          else
-            loadBatch(client, b, bc, res).map {
-              case Status.Created | Status.Conflict => (b, 0)
-              case _                                => (b, 1)
-            }
+        .covary[F]
+        .mapAsync(bc.load.concurrency) {
+          case Cursor(projectIdx, resourceIdx, globalIdx) =>
+            if (globalIdx < start)
+              F.pure((projectIdx, resourceIdx, globalIdx, 0)) // skip resource until the global index reaches the start idx
+            else
+              loadResource(client, bc, res, projectIdx, resourceIdx).map {
+                case Status.Created | Status.Conflict => (projectIdx, resourceIdx, globalIdx, 0)
+                case _                                => (projectIdx, resourceIdx, globalIdx, 1)
+              }
         }
         .mapAccumulate((0, System.currentTimeMillis())) {
-          case ((errors, startTs), (batch, newErrors)) =>
-            val progress = batch.toProgress(errors + newErrors, startTs)
+          case ((errors, startTs), (projectIdx, resourceIdx, globalIdx, newErrors)) =>
+            val progress = Progress(projectIdx, resourceIdx, globalIdx, errors + newErrors, startTs)
             ((errors + newErrors, startTs), progress)
         }
         .debounce(500.millis)
@@ -110,7 +112,7 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
             F.delay {
               erasePreviousLine()
               val elapsed = (System.currentTimeMillis() - startTs) / 1000 //seconds
-              val rate    = if (globalIdx < start) 0 else (globalIdx - start) / elapsed
+              val rate    = if (elapsed == 0 || globalIdx < start) 0 else (globalIdx - start) / elapsed
               println(
                 s"Project $projectIdx - resources: $resourceIdx, total: $globalIdx, errors: $errors, rate: $rate / sec, elapsed: $elapsed sec"
               )
@@ -133,56 +135,30 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
     F.delay(println()) >> createOrg(bc.env, client) >> projectStream >> resourceStream.as(ExitCode.Success)
   }
 
-  private def batch(max: Int): Pipe[F, Cursor, Batch] = {
-    def go(s: Stream[F, Chunk[Cursor]]): Pull[F, Batch, Unit] =
-      s.pull.uncons.flatMap {
-        case Some((hd, tl)) =>
-          val batches = hd.flatten.foldLeft[List[Batch]](Nil) {
-            case (bhead :: btail, cursor) if bhead.projectIdx == cursor.projectIdx =>
-              bhead.add(cursor) :: btail
-            case (list, cursor) =>
-              cursor.toBatch :: list
-          }
-          Pull.output(Chunk.iterable(batches.reverse)) >> go(tl)
-        case None => Pull.done
-      }
-    in =>
-      go(in.chunkN(max, allowFewer = true)).stream
-  }
-
-  private def loadBatch(client: Client[F], batch: Batch, bc: BenchConfig, res: Json): F[Status] = {
-    val collectionSchema = "https://bluebrain.github.io/nexus/schemas/collection.json"
-    val uri              = bc.env.endpoint / "resources" / bc.env.org / s"project${batch.projectIdx}" / collectionSchema
-    val body =
-      Json.obj(
-        "@type" -> Json.fromString("ResourceCollection"),
-        "resources" -> Json.fromValues(
-          batch.resourceIdxs.map { idx =>
-            Json.obj(
-              "resourceId" -> Json.fromString(s"$resourceBase$idx"),
-              "schema"     -> Json.fromString("https://neuroshapes.org/dash/stimulusexperiment"),
-              "resource"   -> res
-            )
-          }
-        )
-      )
-    val finalUri = uri.withQueryParam("skipValidation", !bc.load.validate)
+  private def loadResource(
+      client: Client[F],
+      bc: BenchConfig,
+      res: Json,
+      projectIdx: Int,
+      resourceIdx: Int
+  ): F[Status] = {
+    val uri = bc.env.endpoint / "resources" / bc.env.org / s"project$projectIdx" / "_" / s"$resourceBase$resourceIdx"
     val req = bc.env.token.authorization match {
-      case Some(auth) => POST(body, finalUri, auth, accept)
-      case None       => POST(body, finalUri, accept)
+      case Some(auth) => PUT(res, uri, auth, accept)
+      case None       => PUT(res, uri, accept)
     }
     val fa = client.fetch(req) { resp =>
       implicitly[EntityDecoder[F, Json]]
         .decode(resp, strict = false)
         .value
         .map {
-          case Left(fail) if !resp.status.isSuccess =>
+          case _ if resp.status.isSuccess => resp.status
+          case Left(fail) =>
             println(fail)
             resp.status
-          case Right(json) if !resp.status.isSuccess =>
+          case Right(json) =>
             println(json.spaces2)
             resp.status
-          case _ => resp.status
         }
     }
     retry(fa, 20)
