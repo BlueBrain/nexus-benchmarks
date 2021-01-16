@@ -89,9 +89,8 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
           case ((Cursor(pidx, ridx, gidx), remaining), size) =>
             if (size > remaining) (Cursor(pidx, ridx + remaining, gidx + remaining), 0)
             else (Cursor(pidx + 1, 1, gidx + size), remaining - size)
-
         }
-        cursor
+        cursor.copy(projectIdx = cursor.projectIdx + 1)
       }
 
     def resourceStream: F[Unit] =
