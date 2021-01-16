@@ -88,7 +88,7 @@ object BenchConfig {
               ConfigReader.Result.fail(
                 ConvertFailure(
                   CannotConvert(other, "distribution", s"The value '$other' is not a recognized distribution value."),
-                  distributionCursor.location,
+                  distributionCursor.origin,
                   distributionCursor.path
                 )
               )

@@ -17,7 +17,7 @@ object BenchError {
     override val reason: String = "the application configuration failed to load"
     override val lines: List[String] =
       failures.toList.flatMap { f =>
-        f.location match {
+        f.origin match {
           case Some(loc) => f.description :: s"  file: ${loc.url.toString}" :: s"  line: ${loc.lineNumber}" :: Nil
           case None      => f.description :: Nil
         }

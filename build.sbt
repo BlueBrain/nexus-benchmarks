@@ -25,17 +25,17 @@ scalafmt: {
 }
  */
 
-val catsVersion          = "2.0.0"
+val catsVersion          = "2.3.1"
 val catsEffectVersion    = "2.0.0"
-val circeVersion         = "0.12.1"
-val declineVersion       = "1.0.0"
+val circeVersion         = "0.13.0"
+val declineVersion       = "1.3.0"
 val fs2Version           = "1.0.5"
-val gatlingVersion       = "3.2.1"
-val http4sVersion        = "0.21.0-M5"
+val gatlingVersion       = "3.5.0"
+val http4sVersion        = "1.0.0-M10"
 val kindProjectorVersion = "0.10.3"
 val logbackVersion       = "1.2.3"
-val monixVersion         = "3.0.0"
-val pureconfigVersion    = "0.12.0"
+val monixVersion         = "3.3.0"
+val pureconfigVersion    = "0.14.0"
 
 lazy val catsCore      = "org.typelevel"         %% "cats-core"                % catsVersion
 lazy val catsEffect    = "org.typelevel"         %% "cats-effect"              % catsEffectVersion
@@ -64,7 +64,7 @@ lazy val benchmarks = project
   .settings(
     name           := "nexus-benchmarks",
     organization   := "ch.epfl.bluebrain.nexus",
-    scalaVersion   := "2.12.10",
+    scalaVersion   := "2.13.4",
     publish / skip := true,
     run / fork     := true,
     scalacOptions --= Seq("-Xfatal-warnings"),

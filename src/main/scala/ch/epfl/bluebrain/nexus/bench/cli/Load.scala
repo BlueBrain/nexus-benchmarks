@@ -61,7 +61,7 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
 
   private def exponential(client: Client[F], resources: Int, bc: BenchConfig, res: Json, start: Int): F[ExitCode] = {
     val exponentialProjectSizes =
-      (1 to 100).map { idx =>
+      (1 to 50).map { idx =>
         Math.pow(2d, (idx - 1).toDouble).toInt
       }
 
@@ -82,10 +82,20 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
         F.delay(println("Projects created."))
     }
 
+    val startCursor =
+      if (start == 1) Cursor(1, 1, 1)
+      else {
+        exponentialProjectSizes.foldLeft((Cursor(0, 1, 0), start)) {
+          case ((Cursor(pidx, ridx, gidx), remaining), size) =>
+              if (size > remaining) (Cursor(pidx, ridx + remaining, gidx + remaining), 0)
+              else (Cursor(pidx + 1, 1, gidx + size), remaining - size)
+        }
+      }
+
     def resourceStream: F[Unit] =
       Stream
-        .range(1, resources + 1)
-        .scan(Cursor(1, 1, 1)) {
+        .range(start, resources + 1)
+        .scan(startCursor) {
           case (Cursor(pidx, residx, _), globalidx) =>
             if (residx == exponentialProjectSizes(pidx - 1)) Cursor(pidx + 1, 1, globalidx + 1)
             else Cursor(pidx, residx + 1, globalidx + 1)
@@ -147,12 +157,13 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
       case Some(auth) => PUT(res, uri, auth, accept)
       case None       => PUT(res, uri, accept)
     }
-    val fa = client.fetch(req) { resp =>
+    val fa = client.run(req).use { resp =>
       implicitly[EntityDecoder[F, Json]]
         .decode(resp, strict = false)
         .value
         .map {
-          case _ if resp.status.isSuccess => resp.status
+          case _ if resp.status.isSuccess || resp.status == Status.Conflict =>
+            resp.status
           case Left(fail) =>
             println(fail)
             resp.status
