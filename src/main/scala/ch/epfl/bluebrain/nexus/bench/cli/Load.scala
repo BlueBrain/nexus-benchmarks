@@ -82,14 +82,16 @@ class Load[F[_]: ContextShift](cfg: Config[F], ec: ExecutionContext)(implicit F:
         F.delay(println("Projects created."))
     }
 
-    val startCursor =
+    val startCursor: Cursor =
       if (start == 1) Cursor(1, 1, 1)
       else {
-        exponentialProjectSizes.foldLeft((Cursor(0, 1, 0), start)) {
+        val (cursor, _) = exponentialProjectSizes.foldLeft((Cursor(0, 1, 0), start)) {
           case ((Cursor(pidx, ridx, gidx), remaining), size) =>
-              if (size > remaining) (Cursor(pidx, ridx + remaining, gidx + remaining), 0)
-              else (Cursor(pidx + 1, 1, gidx + size), remaining - size)
+            if (size > remaining) (Cursor(pidx, ridx + remaining, gidx + remaining), 0)
+            else (Cursor(pidx + 1, 1, gidx + size), remaining - size)
+
         }
+        cursor
       }
 
     def resourceStream: F[Unit] =
