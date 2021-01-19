@@ -1,0 +1,74 @@
+{
+  "@context": [
+    "https://incf.github.io/neuroshapes/contexts/schema.json",
+    {
+      "this": "https://neuroshapes.org/dash/stimulusexperiment/shapes/"
+    },
+    "https://bluebrain.github.io/nexus/contexts/shacl-20170720.json"
+  ],
+  "@id": "nsg:dash/stimulusexperiment",
+  "@type": "nxv:Schema",
+  "imports": [
+    "nsg:commons/experimentalactivity",
+    "nsg:commons/typedlabeledontologyterm"
+  ],
+  "prov:wasDerivedFrom": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/electrophysiology/src/main/resources/schemas/neurosciencegraph/electrophysiology/stimulusexperiment/v1.0.0.json",
+  "shapes": [
+    {
+      "@id": "this:StimulusExperimentShape",
+      "@type": "NodeShape",
+      "label": "Stimulus experiment shape definition",
+      "and": [
+        {
+          "node": "nsg:commons/experimentalactivity/shapes/ExperimentalActivityShape"
+        },
+        {
+          "property": [
+            {
+              "description": "The shape of the stimulus",
+              "maxCount": 1,
+              "minCount": 1,
+              "name": "Stimulus",
+              "node": "this:StimulusShape",
+              "path": "nsg:stimulus"
+            },
+            {
+              "class": "nsg:PatchedCell",
+              "description": "The patched cell used",
+              "maxCount": 1,
+              "minCount": 1,
+              "path": "prov:used"
+            }
+          ]
+        }
+      ],
+      "nodeKind": "BlankNode:OrIRI",
+      "targetClass": "nsg:StimulusExperiment"
+    },
+    {
+      "@id": "this:StimulusShape",
+      "@type": "NodeShape",
+      "label": "Stimulus shape definition",
+      "property": [
+        {
+          "maxCount": 1,
+          "minCount": 1,
+          "name": "Stimulus type",
+          "node": "nsg:commons/typedlabeledontologyterm/shapes/StimulusTypeOntologyTermShape",
+          "path": "nsg:stimulusType"
+        },
+        {
+          "maxCount": 1,
+          "name": "eCode",
+          "node": "nsg:commons/typedlabeledontologyterm/shapes/EcodeOntologyTermShape",
+          "path": "nsg:eCode"
+        },
+        {
+          "datatype": "xsd:string",
+          "maxCount": 1,
+          "path": "schema:description"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4706 @@
+{
+  "id": "https://neuroshapes.org/dash/stimulusexperiment",
+  "project": "neuroshapes/datamodels",
+  "source": {
+    "@context": [
+      "https://incf.github.io/neuroshapes/contexts/schema.json",
+      {
+        "this": "https://neuroshapes.org/dash/stimulusexperiment/shapes/"
+      }
+    ],
+    "@id": "https://neuroshapes.org/dash/stimulusexperiment",
+    "@type": "nxv:Schema",
+    "imports": [
+      "https://neuroshapes.org/commons/experimentalactivity",
+      "https://neuroshapes.org/commons/typedlabeledontologyterm"
+    ],
+    "prov:wasDerivedFrom": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/electrophysiology/src/main/resources/schemas/neurosciencegraph/electrophysiology/stimulusexperiment/v1.0.0.json",
+    "shapes": [
+      {
+        "@id": "this:StimulusExperimentShape",
+        "@type": "sh:NodeShape",
+        "label": "Stimulus experiment shape definition",
+        "targetClass": "nsg:StimulusExperiment",
+        "nodeKind": "sh:BlankNodeOrIRI",
+        "and": [
+          {
+            "node": "https://neuroshapes.org/commons/experimentalactivity/shapes/ExperimentalActivityShape"
+          },
+          {
+            "property": [
+              {
+                "path": "nsg:stimulus",
+                "name": "Stimulus",
+                "description": "The shape of the stimulus",
+                "node": "this:StimulusShape",
+                "minCount": 1,
+                "maxCount": 1
+              },
+              {
+                "path": "prov:used",
+                "description": "The patched cell used",
+                "class": "nsg:PatchedCell",
+                "minCount": 1,
+                "maxCount": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@id": "this:StimulusShape",
+        "@type": "sh:NodeShape",
+        "label": "Stimulus shape definition",
+        "property": [
+          {
+            "path": "nsg:stimulusType",
+            "name": "Stimulus type",
+            "node": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/StimulusTypeOntologyTermShape",
+            "minCount": 1,
+            "maxCount": 1
+          },
+          {
+            "path": "nsg:eCode",
+            "name": "eCode",
+            "node": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/EcodeOntologyTermShape",
+            "maxCount": 1
+          },
+          {
+            "path": "schema:description",
+            "datatype": "xsd:string",
+            "maxCount": 1
+          }
+        ]
+      }
+    ]
+  },
+  "compacted": {
+    "@context": [
+      "https://incf.github.io/neuroshapes/contexts/schema.json",
+      {
+        "this": "https://neuroshapes.org/dash/stimulusexperiment/shapes/"
+      },
+      "https://bluebrain.github.io/nexus/contexts/shacl-20170720.json"
+    ],
+    "@id": "nsg:dash/stimulusexperiment",
+    "@type": "nxv:Schema",
+    "imports": [
+      "nsg:commons/experimentalactivity",
+      "nsg:commons/typedlabeledontologyterm"
+    ],
+    "prov:wasDerivedFrom": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/electrophysiology/src/main/resources/schemas/neurosciencegraph/electrophysiology/stimulusexperiment/v1.0.0.json",
+    "shapes": [
+      {
+        "@id": "this:StimulusExperimentShape",
+        "@type": "NodeShape",
+        "label": "Stimulus experiment shape definition",
+        "and": [
+          {
+            "node": "nsg:commons/experimentalactivity/shapes/ExperimentalActivityShape"
+          },
+          {
+            "property": [
+              {
+                "description": "The shape of the stimulus",
+                "maxCount": 1,
+                "minCount": 1,
+                "name": "Stimulus",
+                "node": "this:StimulusShape",
+                "path": "nsg:stimulus"
+              },
+              {
+                "class": "nsg:PatchedCell",
+                "description": "The patched cell used",
+                "maxCount": 1,
+                "minCount": 1,
+                "path": "prov:used"
+              }
+            ]
+          }
+        ],
+        "nodeKind": "BlankNode:OrIRI",
+        "targetClass": "nsg:StimulusExperiment"
+      },
+      {
+        "@id": "this:StimulusShape",
+        "@type": "NodeShape",
+        "label": "Stimulus shape definition",
+        "property": [
+          {
+            "maxCount": 1,
+            "minCount": 1,
+            "name": "Stimulus type",
+            "node": "nsg:commons/typedlabeledontologyterm/shapes/StimulusTypeOntologyTermShape",
+            "path": "nsg:stimulusType"
+          },
+          {
+            "maxCount": 1,
+            "name": "eCode",
+            "node": "nsg:commons/typedlabeledontologyterm/shapes/EcodeOntologyTermShape",
+            "path": "nsg:eCode"
+          },
+          {
+            "datatype": "xsd:string",
+            "maxCount": 1,
+            "path": "schema:description"
+          }
+        ]
+      }
+    ]
+  },
+  "expanded": [
+    {
+      "@id": "https://neuroshapes.org/dash/stimulusexperiment",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/2002/07/owl#imports": [
+        {
+          "@id": "https://neuroshapes.org/commons/experimentalactivity"
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm"
+        }
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/electrophysiology/src/main/resources/schemas/neurosciencegraph/electrophysiology/stimulusexperiment/v1.0.0.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/dash/stimulusexperiment/shapes/StimulusExperimentShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/experimentalactivity/shapes/ExperimentalActivityShape"
+                    }
+                  ]
+                },
+                {
+                  "http://www.w3.org/ns/shacl#property": [
+                    {
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "The shape of the stimulus"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#maxCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#minCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#name": [
+                        {
+                          "@value": "Stimulus"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#node": [
+                        {
+                          "@id": "https://neuroshapes.org/dash/stimulusexperiment/shapes/StimulusShape"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "https://neuroshapes.org/stimulus"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#class": [
+                        {
+                          "@id": "https://neuroshapes.org/PatchedCell"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "The patched cell used"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#maxCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#minCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://www.w3.org/ns/prov#used"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "Stimulus experiment shape definition",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#targetClass": [
+            {
+              "@id": "https://neuroshapes.org/StimulusExperiment"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/dash/stimulusexperiment/shapes/StimulusShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "Stimulus shape definition",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#minCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Stimulus type"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#node": [
+                {
+                  "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/StimulusTypeOntologyTermShape"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "https://neuroshapes.org/stimulusType"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "eCode"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#node": [
+                {
+                  "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/EcodeOntologyTermShape"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "https://neuroshapes.org/eCode"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/description"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/experimentalactivity",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/2002/07/owl#imports": [
+        {
+          "@id": "https://provshapes.org/commons/activity"
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/experimentalprotocol"
+        }
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/commons/src/main/resources/schemas/neurosciencegraph/commons/experimentalactivity/v0.1.0.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/experimentalactivity/shapes/ExperimentalActivityShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://provshapes.org/commons/activity/shapes/ActivityShape"
+                    }
+                  ]
+                },
+                {
+                  "http://www.w3.org/ns/shacl#property": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/experimentalprotocol/shapes/HadProtocolValueShape"
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#minCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://www.w3.org/ns/prov#used"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "Experimental activity description.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://provshapes.org/commons/activity",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/2002/07/owl#imports": [
+        {
+          "@id": "https://provshapes.org/commons/usage"
+        }
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/BlueBrain/nexus-prov/blob/v1.2.0/modules/prov/src/main/resources/schemas/nexus/provsh/activity/v1.0.0.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://provshapes.org/commons/activity/shapes/ActivityShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+              "@value": "An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "Activity shape",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Agent"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "An activity association is an assignment of responsibility to an agent or entity for an activity, indicating that the agent or entity had a role in the activity. The associated agent or entity should be identified by an IRI."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Agent"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#wasAssociatedWith"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Entity"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "An entity identified by an IRI and that was generated by the current activity."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Generated"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#generated"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Entity"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "An entity identified by an IRI and that was used in the current activity."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Used"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#used"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Start is when an activity is deemed to have been started by an entity, known as trigger. The activity did not exist before it starts. Any usage, generation, or invalidation involving an activity follows the activity's start. A start may refer to a trigger entity that set off the activity, or to an activity, known as starter, that generated the trigger."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Was Started By"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#or": [
+                {
+                  "@list": [
+                    {
+                      "http://www.w3.org/ns/shacl#class": [
+                        {
+                          "@id": "http://www.w3.org/ns/prov#Agent"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#class": [
+                        {
+                          "@id": "http://www.w3.org/ns/prov#Entity"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#wasStartedBy"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#dateTime"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The activity start time. It should precede the value of prov:endedAtTime."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#lessThan": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#endedAtTime"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Start Date"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#startedAtTime"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#dateTime"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The activity end time."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "End Date"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#endedAtTime"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Association"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "An activity qualified association allows to further specify the role and plan that an agent had."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#node": [
+                {
+                  "@id": "https://provshapes.org/commons/activity/shapes/AssociationShape"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#qualifiedAssociation"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Usage"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "An activity qualified usage allows to further specify the context of an entity usage: it's role, the time at which the usage started, why the entity is used,..."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#node": [
+                {
+                  "@id": "https://provshapes.org/commons/usage/shapes/UsageShape"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#qualifiedUsage"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://provshapes.org/commons/activity/shapes/AssociationShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Plan"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#hadPlan"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#hadRole"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Agent"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#minCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#agent"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://provshapes.org/commons/usage",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/BlueBrain/nexus-prov/blob/v1.2.0/modules/prov/src/main/resources/schemas/nexus/provsh/usage/v1.0.0.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://provshapes.org/commons/usage/shapes/UsageShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+              "@value": "Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "Usage shape",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#dateTime"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The time at which the entity was used."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "At time"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#atTime"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "A role is the function of an entity or agent with respect to an activity, in the context of a usage, generation, invalidation, association, start, and end."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Role"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#hadRole"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Entity"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The used entity."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#minCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Used entity"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#entity"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/experimentalprotocol",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/2002/07/owl#imports": [
+        {
+          "@id": "https://neuroshapes.org/commons/quantitativevalue"
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/protocol"
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/identifier"
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm"
+        }
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/commons/src/main/resources/schemas/neurosciencegraph/commons/experimentalprotocol/v0.1.1.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/experimentalprotocol/shapes/ExperimentalProtocolShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/protocol/shapes/ProtocolShape"
+                    }
+                  ]
+                },
+                {
+                  "http://www.w3.org/ns/shacl#property": [
+                    {
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "Materials used in protocol"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#name": [
+                        {
+                          "@value": "Materials"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#node": [
+                        {
+                          "@id": "https://neuroshapes.org/commons/experimentalprotocol/shapes/MaterialsShape"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "https://neuroshapes.org/materials"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#class": [
+                        {
+                          "@id": "http://schema.org/Organization"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "Name of vendor of protocol"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#name": [
+                        {
+                          "@value": "Vendor"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "https://neuroshapes.org/vendor"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "Steps of protocol"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#name": [
+                        {
+                          "@value": "Steps"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "https://neuroshapes.org/steps"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "Warning for protocol"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#name": [
+                        {
+                          "@value": "Warning"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "https://neuroshapes.org/warning"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "Usable in activity"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#name": [
+                        {
+                          "@value": "Usable in activity"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#node": [
+                        {
+                          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/ActivityTypeOntologyTermShape"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "https://neuroshapes.org/activityType"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "Protocol shape definition based on protocols.io json schema. The identifier of a protocol should be a valid IRI.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+            {
+              "@id": "http://apidoc.protocols.io/v3/#reagent-object"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/experimentalprotocol/shapes/MaterialsShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Name of reagent/material used"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#minCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Reagent name"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "https://neuroshapes.org/reagentName"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Molar weight of reagent"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Reagent molar weight"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#node": [
+                {
+                  "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/QuantitativeValueShape"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "https://neuroshapes.org/reagentMolarWeight"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Linear formula of reagent"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Reagent linear formula"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "https://neuroshapes.org/reagentLinearFormula"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Stock keeping unit of reagent/material"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Reagent SKU"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/sku"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "URL of reagent/material"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Reagent URL"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#node": [
+                {
+                  "@id": "https://neuroshapes.org/commons/identifier/shapes/IdentifierShape"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/identifier"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://schema.org/Organization"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Name of vendor of reagent"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Reagent vendor"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "https://neuroshapes.org/reagentVendor"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/experimentalprotocol/shapes/HadProtocolValueShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#PropertyShape"
+          ],
+          "http://www.w3.org/ns/shacl#class": [
+            {
+              "@id": "https://neuroshapes.org/ExperimentalProtocol"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#description": [
+            {
+              "@value": "The value of nsg:hadProtocol should be of type nsg:ExperimentalProtocol."
+            }
+          ],
+          "http://www.w3.org/ns/shacl#name": [
+            {
+              "@value": "Experimental protocol"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#path": [
+            {
+              "@id": "https://neuroshapes.org/hadProtocol"
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+            {
+              "@id": "https://neuroshapes.org/commons/experimentalprotocol/shapes/ProtocolShape"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/quantitativevalue",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/2002/07/owl#imports": [
+        {
+          "@id": "https://neuroshapes.org/commons/labeledontologyentity"
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/unit"
+        }
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/commons/src/main/resources/schemas/neurosciencegraph/commons/quantitativevalue/v0.1.2.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/QuantitativeValueShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The value of the quantitative value or property value node."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#minCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Value"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#or": [
+                {
+                  "@list": [
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#float"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#decimal"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#double"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#int"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#long"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#unsignedInt"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#unsignedLong"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/value"
+                }
+              ]
+            },
+            {
+              "@id": "https://neuroshapes.org/commons/unit/shapes/WithUnitCodeShape"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/RepeatedQuantitativeValueShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/QuantitativeValueShape"
+                    }
+                  ]
+                },
+                {
+                  "http://www.w3.org/ns/shacl#property": [
+                    {
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "Number of repetitions of an activity (a measurement for example)."
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#maxCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#minCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#name": [
+                        {
+                          "@value": "Repetitions"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/repetitions"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#xone": [
+                        {
+                          "@list": [
+                            {
+                              "http://www.w3.org/ns/shacl#datatype": [
+                                {
+                                  "@id": "http://www.w3.org/2001/XMLSchema#integer"
+                                }
+                              ]
+                            },
+                            {
+                              "http://www.w3.org/ns/shacl#node": [
+                                {
+                                  "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/QuantitativeValueShape"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/PositiveQuantitativeValueShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/QuantitativeValueShape"
+                    }
+                  ]
+                },
+                {
+                  "http://www.w3.org/ns/shacl#property": [
+                    {
+                      "http://www.w3.org/ns/shacl#minInclusive": [
+                        {
+                          "@value": 0
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/value"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/NegativeQuantitativeValueShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/QuantitativeValueShape"
+                    }
+                  ]
+                },
+                {
+                  "http://www.w3.org/ns/shacl#property": [
+                    {
+                      "http://www.w3.org/ns/shacl#maxExclusive": [
+                        {
+                          "@value": 0
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/value"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/RangeQuantitativeValueShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/unit/shapes/UnitShape"
+                    }
+                  ]
+                },
+                {
+                  "http://www.w3.org/ns/shacl#property": [
+                    {
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "The minimum value of the quantitative value."
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#lessThan": [
+                        {
+                          "@id": "http://schema.org/maxValue"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#maxCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#minCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#name": [
+                        {
+                          "@value": "Minimum value"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/minValue"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "The maximum value of the quantitative value."
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#maxCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#minCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#name": [
+                        {
+                          "@value": "Maximum value"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/maxValue"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#minCount": [
+                        {
+                          "@value": 0,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/value"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/labeledontologyentity",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/commons/src/main/resources/schemas/neurosciencegraph/commons/labeledontologyentity/v0.1.1.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#IRI"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Human readable label."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#minCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Label"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/2000/01/rdf-schema#label"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/unit",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/2002/07/owl#imports": [
+        {
+          "@id": "https://neuroshapes.org/commons/labeledontologyentity"
+        }
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/commons/src/main/resources/schemas/neurosciencegraph/commons/unit/v0.1.0.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/unit/shapes/UnitShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "@id": "https://neuroshapes.org/commons/unit/shapes/UnitCodePropertyShape",
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Unit"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#or": [
+                {
+                  "@list": [
+                    {
+                      "http://www.w3.org/ns/shacl#node": [
+                        {
+                          "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/unitCode"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/unit/shapes/WithUnitCodeShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#PropertyShape"
+          ],
+          "http://www.w3.org/ns/shacl#minCount": [
+            {
+              "@value": 1,
+              "@type": "http://www.w3.org/2001/XMLSchema#integer"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#name": [
+            {
+              "@value": "Unit"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#or": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                },
+                {
+                  "http://www.w3.org/ns/shacl#datatype": [
+                    {
+                      "@id": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/ns/shacl#path": [
+            {
+              "@id": "http://schema.org/unitCode"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/protocol",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/2002/07/owl#imports": [
+        {
+          "@id": "https://neuroshapes.org/commons/entity"
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/identifier"
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/organization"
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/person"
+        }
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/commons/src/main/resources/schemas/neurosciencegraph/commons/protocol/v0.1.5.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/protocol/shapes/ProtocolShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/entity/shapes/EntityShape"
+                    }
+                  ]
+                },
+                {
+                  "http://www.w3.org/ns/shacl#property": [
+                    {
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "The identifier of protocol such as a DOI, ISBN,..."
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#name": [
+                        {
+                          "@value": "Identifier"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#node": [
+                        {
+                          "@id": "https://neuroshapes.org/commons/identifier/shapes/IdentifierShape"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/identifier"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#dateTime"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "Publishing date of protocol."
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#maxCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#name": [
+                        {
+                          "@value": "date published"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/datePublished"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "Author of the protocol"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#name": [
+                        {
+                          "@value": "Author"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#nodeKind": [
+                        {
+                          "@id": "http://www.w3.org/ns/shacl#IRI"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/author"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#xone": [
+                        {
+                          "@list": [
+                            {
+                              "http://www.w3.org/ns/shacl#class": [
+                                {
+                                  "@id": "http://schema.org/Person"
+                                }
+                              ]
+                            },
+                            {
+                              "http://www.w3.org/ns/shacl#class": [
+                                {
+                                  "@id": "http://schema.org/Organization"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "Sub-protocols of the protocol."
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#name": [
+                        {
+                          "@value": "Has part"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/hasPart"
+                        }
+                      ],
+                      "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+                        {
+                          "@id": "https://neuroshapes.org/Protocol"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "Protocol shape definition.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/protocol/shapes/HadProtocolValueShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#PropertyShape"
+          ],
+          "http://www.w3.org/ns/shacl#class": [
+            {
+              "@id": "https://neuroshapes.org/Protocol"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#description": [
+            {
+              "@value": "The value of nsg:hadProtocol should be of type nsg:Protocol."
+            }
+          ],
+          "http://www.w3.org/ns/shacl#name": [
+            {
+              "@value": "Protocol"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#path": [
+            {
+              "@id": "https://neuroshapes.org/hadProtocol"
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+            {
+              "@id": "https://neuroshapes.org/commons/protocol/shapes/ProtocolShape"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/entity",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/2002/07/owl#imports": [
+        {
+          "@id": "https://neuroshapes.org/commons/identifier"
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/license"
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/language"
+        },
+        {
+          "@id": "https://provshapes.org/commons/generation"
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/distribution"
+        },
+        {
+          "@id": "https://provshapes.org/commons/invalidation"
+        },
+        {
+          "@id": "https://provshapes.org/commons/derivation"
+        }
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/commons/src/main/resources/schemas/neurosciencegraph/commons/entity/v1.0.0.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/entity/shapes/EntityShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+              "@value": "An entity is a physical, digital, conceptual, or other kind of thing with some fixed aspects; entities may be real or imaginary.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "Entity shape",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The entity name."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#minCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Name"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/name"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The entity description"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Description"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/description"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "URI of an entity sharing the same identity."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Same as"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/sameAs"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The dataset language."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Language"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#node": [
+                {
+                  "@id": "https://neuroshapes.org/commons/language/shapes/LanguageShape"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/language"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Identifier"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Identifier"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#node": [
+                {
+                  "@id": "https://neuroshapes.org/commons/identifier/shapes/IdentifierShape"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/identifier"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "A citation or reference to another creative work, such as another publication, web page, scholarly article, etc."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Citation"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#or": [
+                {
+                  "@list": [
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#nodeKind": [
+                        {
+                          "@id": "http://www.w3.org/ns/shacl#IRI"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/citation"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "https://neuroshapes.org/License"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "A Link towards the dataset license."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "License"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#node": [
+                {
+                  "@id": "https://neuroshapes.org/commons/license/shapes/LicenseShape"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/license"
+                }
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+                {
+                  "@id": "https://github.com/creativecommons/cc.licenserdf"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#dateTime"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Date at which this entity was created."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Creation date"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/dateCreated"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The entity for which this entity is a revision of. An entity revision is a specific type of derivation."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Revision of"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#wasRevisionOf"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The entity from which this entity was derived from."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Derived from"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#wasDerivedFrom"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "A landing page describing the entity."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "URL"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/url"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#dateTime"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The date of the last update of this entity."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Update date"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/dateModified"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Keywords describing the entity."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Keywords"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/keywords"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The agent to which this entity was attributed to."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Attributed to"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#wasAttributedTo"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Derivation"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Qualified Derivation"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "https://neuroshapes.org/derivation"
+                }
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+                {
+                  "@id": "https://provshapes.org/commons/derivation/shapes/DerivationShape"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "https://neuroshapes.org/Contribution"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Information about the contribution of an agent during the generation of this dataset."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Qualified Contribution"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "https://neuroshapes.org/contribution"
+                }
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+                {
+                  "@id": "https://neuroshapes.org/commons/contribution/shapes/ContributionShape"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Generation"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Generation."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Qualified Generation"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "https://neuroshapes.org/generation"
+                }
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+                {
+                  "@id": "https://provshapes.org/commons/generation/shapes/GenerationShape"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Invalidation"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Invalidation."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Qualified Invalidation"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "https://neuroshapes.org/invalidation"
+                }
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+                {
+                  "@id": "https://provshapes.org/commons/invalidation/shapes/InvalidationShape"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "A reference to an entity representing an image that can be used as preview."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Preview"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/image"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://schema.org/DataDownload"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "A dataset in downloadable form. The downloadable form has a specific format and is located at a specific location."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Distribution"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#node": [
+                {
+                  "@id": "https://neuroshapes.org/commons/distribution/shapes/DistributionShape"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/distribution"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/language",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/language/shapes/LanguageShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+              "@value": "A shape to represent natural languages.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The Language name (e.g English)."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Name"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/name"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "An alias for the language name (e.g English => en)."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Alias"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/alternateName"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://provshapes.org/commons/derivation",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/BlueBrain/nexus-prov/blob/v1.2.0/modules/prov/src/main/resources/schemas/nexus/provsh/derivation/v1.0.0.json"
+        }
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+        {
+          "@id": "https://provshapes.org/commons/derivation/shapes/"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://provshapes.org/commons/derivation/shapes/DerivationShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+              "@value": "A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "Entity derivation shape",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Entity"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "An entity from which the current one derived from."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#minCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Entity"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#entity"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Activity"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The optional activity that used the entity from which the current one derived from."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Activity"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#hadActivity"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Usage"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity.."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Usage"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#hadUsage"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/identifier",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/2002/07/owl#imports": [
+        {
+          "@id": "https://neuroshapes.org/commons/propertyvalue"
+        }
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/commons/src/main/resources/schemas/neurosciencegraph/commons/identifier/v0.2.1.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/identifier/shapes/IdentifierShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "@id": "https://neuroshapes.org/commons/identifier/shapes/WithIdentifierPropertyShape",
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Identifier"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/identifier"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#xone": [
+                {
+                  "@list": [
+                    {
+                      "http://www.w3.org/ns/shacl#nodeKind": [
+                        {
+                          "@id": "http://www.w3.org/ns/shacl#IRI"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#node": [
+                        {
+                          "@id": "https://neuroshapes.org/commons/propertyvalue/shapes/PropertyValueShape"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/identifier/shapes/WithStructuredIdentifierShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#PropertyShape"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "Key value type of identifier.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#node": [
+            {
+              "@id": "https://neuroshapes.org/commons/propertyvalue/shapes/PropertyValueShape"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#path": [
+            {
+              "@id": "http://schema.org/identifier"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/identifier/shapes/WithOrcidIdentifierPropertyShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#PropertyShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/propertyvalue/shapes/PropertyValueShape"
+                    }
+                  ]
+                },
+                {
+                  "http://www.w3.org/ns/shacl#or": [
+                    {
+                      "@list": [
+                        {
+                          "http://www.w3.org/ns/shacl#property": [
+                            {
+                              "http://www.w3.org/ns/shacl#datatype": [
+                                {
+                                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#description": [
+                                {
+                                  "@value": "The property name."
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#hasValue": [
+                                {
+                                  "@value": "http//orcid.org"
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#maxCount": [
+                                {
+                                  "@value": 1,
+                                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#name": [
+                                {
+                                  "@value": "Orcid ID"
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#path": [
+                                {
+                                  "@id": "http://schema.org/propertyID"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "http://www.w3.org/ns/shacl#property": [
+                            {
+                              "http://www.w3.org/ns/shacl#datatype": [
+                                {
+                                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#description": [
+                                {
+                                  "@value": "The property name."
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#hasValue": [
+                                {
+                                  "@value": "orcid"
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#maxCount": [
+                                {
+                                  "@value": 1,
+                                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#name": [
+                                {
+                                  "@value": "Orcid ID"
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#path": [
+                                {
+                                  "@id": "http://schema.org/name"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "http://www.w3.org/ns/shacl#property": [
+                    {
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "The orcid identifier"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#maxCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#minCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#name": [
+                        {
+                          "@value": "Orcid"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#nodeKind": [
+                        {
+                          "@id": "http://www.w3.org/ns/shacl#IRI"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/value"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "A shape for an ORCID based researcher identifier.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#path": [
+            {
+              "@id": "http://schema.org/identifier"
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+            {
+              "@id": "https://support.orcid.org/knowledgebase/articles/116780-structure-of-the-orcid-identifier"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/identifier/shapes/WithGridIdentifierPropertyShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#PropertyShape"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "A shape for GRID (https://www.grid.ac) based organization identifier.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#path": [
+            {
+              "@id": "http://schema.org/identifier"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#pattern": [
+            {
+              "@value": "^(https://www.grid.ac)"
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+            {
+              "@id": "https://www.grid.ac"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/propertyvalue",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/nexus-schemas/src/main/resources/schemas/nexus/schemaorgsh/propertyvalue/v0.1.0.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/propertyvalue/shapes/PropertyValueShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The property name."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Property ID"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/propertyID"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The property value."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Value"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/value"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/distribution",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/2002/07/owl#imports": [
+        {
+          "@id": "https://neuroshapes.org/commons/quantitativevalue"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/distribution/shapes/DistributionShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#or": [
+                    {
+                      "@list": [
+                        {
+                          "http://www.w3.org/ns/shacl#property": [
+                            {
+                              "http://www.w3.org/ns/shacl#description": [
+                                {
+                                  "@value": "When followed this link leads to the actual data."
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#maxCount": [
+                                {
+                                  "@value": 1,
+                                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#minCount": [
+                                {
+                                  "@value": 1,
+                                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#nodeKind": [
+                                {
+                                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#path": [
+                                {
+                                  "@id": "http://schema.org/contentUrl"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "http://www.w3.org/ns/shacl#property": [
+                            {
+                              "http://www.w3.org/ns/shacl#description": [
+                                {
+                                  "@value": "When followed this link leads to a resource providing further description on how to download the attached data."
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#maxCount": [
+                                {
+                                  "@value": 1,
+                                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#minCount": [
+                                {
+                                  "@value": 1,
+                                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#nodeKind": [
+                                {
+                                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                                }
+                              ],
+                              "http://www.w3.org/ns/shacl#path": [
+                                {
+                                  "@id": "http://schema.org/url"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "http://www.w3.org/ns/shacl#property": [
+                    {
+                      "http://www.w3.org/ns/shacl#maxCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#node": [
+                        {
+                          "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/PositiveQuantitativeValueShape"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/contentSize"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#node": [
+                        {
+                          "@id": "https://neuroshapes.org/commons/distribution/shapes/DigestShape"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "https://neuroshapes.org/digest"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "A Link towards the distribution license."
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/license"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "The distribution name."
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/name"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/2000/01/rdf-schema#comment": [
+                        {
+                          "@value": "The pattern used here is temporary and not complete. The media type values need to be taken from a controlled vocabulary: to be handled in a next iteration.",
+                          "@type": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#description": [
+                        {
+                          "@value": "The media value should start with one of the following application|audio|font|image|message|model|multipart|text|video followed by / and then any Alphanumeric characters."
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#maxCount": [
+                        {
+                          "@value": 1,
+                          "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#path": [
+                        {
+                          "@id": "http://schema.org/encodingFormat"
+                        }
+                      ],
+                      "http://www.w3.org/ns/shacl#pattern": [
+                        {
+                          "@value": "^(application|audio|font|image|message|model|multipart|text|video)/[A-Za-z0-9]+"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/distribution/shapes/DigestShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The digest value."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#minCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Digest"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/value"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The digest algorithm."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#minCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Algorithm"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/algorithm"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://provshapes.org/commons/generation",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/BlueBrain/nexus-prov/blob/v1.2.0/modules/prov/src/main/resources/schemas/nexus/provsh/generation/v1.0.0.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://provshapes.org/commons/generation/shapes/GenerationShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+              "@value": "An instance of prov:Generation provides additional descriptions about the binary prov:wasGeneratedBy relation from a generated prov:Entity to the prov:Activity that generated it. For example, :cake prov:wasGeneratedBy :baking; prov:qualifiedGeneration [ a prov:Generation; prov:activity :baking; :foo :bar ]. Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "Entity generation shape",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#dateTime"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The time at which the entity was generated."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "At time"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#atTime"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Activity"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The activity that generates the entity."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Activity"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#activity"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/license",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/license/shapes/LicenseShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#IRI"
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+            {
+              "@id": "https://www.w3.org/TR/vocab-dcat"
+            },
+            {
+              "@id": "https://github.com/creativecommons/cc.licenserdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://provshapes.org/commons/invalidation",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://provshapes.org/commons/invalidation/shapes/InvalidationShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+              "@value": "Invalidation is the start of the destruction, cessation, or expiry of an existing entity by an activity. The entity is no longer available for use (or further invalidation) after invalidation. Any generation or usage of an entity precedes its invalidation.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "Entity Invalidation shape",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#dateTime"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The time at which the entity was invalidated."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "At time"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#atTime"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#Activity"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "The activity that invalidates the entity."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#maxCount": [
+                {
+                  "@value": 1,
+                  "@type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Activity"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#nodeKind": [
+                {
+                  "@id": "http://www.w3.org/ns/shacl#IRI"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://www.w3.org/ns/prov#activity"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/organization",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/2002/07/owl#imports": [
+        {
+          "@id": "https://neuroshapes.org/commons/identifier"
+        }
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/commons/src/main/resources/schemas/neurosciencegraph/commons/organization/v0.1.0.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/organization/shapes/OrganizationShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+              "@value": "A schema:Organization can have a GRID identifier.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "A shape for describing an organization based on http://schema.org/Organization.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://schema.org/Organization"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Parent Organization"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/parentOrganization"
+                }
+              ]
+            },
+            {
+              "@id": "https://neuroshapes.org/commons/identifier/shapes/WithGridIdentifierPropertyShape"
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Email"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/email"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#pattern": [
+                {
+                  "@value": "^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Physical address of the organization."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Address"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#or": [
+                {
+                  "@list": [
+                    {
+                      "http://www.w3.org/ns/shacl#node": [
+                        {
+                          "@id": "https://neuroshapes.org/commons/organization/shapes/PostalAddressShape"
+                        }
+                      ]
+                    },
+                    {
+                      "http://www.w3.org/ns/shacl#datatype": [
+                        {
+                          "@id": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/address"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Name of the organization"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Name"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/name"
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+            {
+              "@id": "http://schema.org/Organization"
+            },
+            {
+              "@id": "https://www.grid.ac"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/organization/shapes/PostalAddressShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Fax"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/faxNumber"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Telephone"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/telephone"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Country"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/addressCountry"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Locality"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/addressLocality"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Postal Code"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/postalCode"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Street"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/streetAddress"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/person",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/2002/07/owl#imports": [
+        {
+          "@id": "https://neuroshapes.org/commons/organization"
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/identifier"
+        }
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/commons/src/main/resources/schemas/neurosciencegraph/commons/person/v0.1.0.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/person/shapes/PersonShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "Schema.org person specification is used as a vocabulary to describe a person.",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#nodeKind": [
+            {
+              "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#property": [
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Email"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/email"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#pattern": [
+                {
+                  "@value": "^[^@\\\\s]+@[^@\\\\s]+\\\\.[^@\\\\s]+$"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#class": [
+                {
+                  "@id": "http://schema.org/Organization"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Person's affiliation"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#node": [
+                {
+                  "@id": "https://neuroshapes.org/commons/organization/shapes/OrganizationShape"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/affiliation"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "givenName"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/givenName"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "familyName"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/familyName"
+                }
+              ]
+            },
+            {
+              "http://www.w3.org/ns/shacl#datatype": [
+                {
+                  "@id": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "An additional name for a Person, can be used for a middle name."
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "additionalName"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/additionalName"
+                }
+              ]
+            },
+            {
+              "@id": "https://neuroshapes.org/commons/identifier/shapes/WithOrcidIdentifierPropertyShape"
+            },
+            {
+              "http://www.w3.org/ns/shacl#description": [
+                {
+                  "@value": "Person identifiers (e.g orcid)"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#name": [
+                {
+                  "@value": "Person identifiers"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#node": [
+                {
+                  "@id": "https://neuroshapes.org/commons/identifier/shapes/IdentifierShape"
+                }
+              ],
+              "http://www.w3.org/ns/shacl#path": [
+                {
+                  "@id": "http://schema.org/identifier"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm",
+      "@type": [
+        "https://bluebrain.github.io/nexus/vocabulary/Schema"
+      ],
+      "http://www.w3.org/2002/07/owl#imports": [
+        {
+          "@id": "https://neuroshapes.org/commons/labeledontologyentity"
+        }
+      ],
+      "http://www.w3.org/ns/prov#wasDerivedFrom": [
+        {
+          "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/commons/src/main/resources/schemas/neurosciencegraph/commons/typedlabeledontologyterm/v0.1.4.json"
+        }
+      ],
+      "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/SpeciesOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing a species",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "https://neuroshapes.org/expectedRootClass": [
+            {
+              "@id": "https://neuroshapes.org/Species",
+              "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+                {
+                  "@id": "http://bbp.epfl.ch/neurosciencegraph/ontologies/speciestaxonomy"
+                }
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                  "@value": "NCBI species taxonomy ontology",
+                  "@type": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/StrainOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing an animal strain",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "https://neuroshapes.org/expectedRootClass": [
+            {
+              "@id": "https://neuroshapes.org/Strain",
+              "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+                {
+                  "@id": "http://bbp.epfl.ch/neurosciencegraph/ontologies/strain"
+                }
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                  "@value": "Animal strain",
+                  "@type": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/ModelSimulationStatusOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing a model simulation status",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/LayerOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#in": [
+            {
+              "@list": [
+                {
+                  "@value": "L1"
+                },
+                {
+                  "@value": "L2"
+                },
+                {
+                  "@value": "L3"
+                },
+                {
+                  "@value": "L4"
+                },
+                {
+                  "@value": "L5"
+                },
+                {
+                  "@value": "L6"
+                },
+                {
+                  "@value": "y"
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing brain parcellation layers",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/SexOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing a sex",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "https://neuroshapes.org/expectedRootClass": [
+            {
+              "@id": "https://neuroshapes.org/BiologicalSex",
+              "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+                {
+                  "@id": "http://bbp.epfl.ch/neurosciencegraph/ontologies/sex"
+                }
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                  "@value": "Biological Sex",
+                  "@type": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/CellTypeOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing a cell type",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "https://neuroshapes.org/expectedRootClass": [
+            {
+              "@id": "https://neuroshapes.org/CellType",
+              "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                  "@value": "Cell Type Ontology.",
+                  "@type": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/ObjectiveTypeOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing a microscope objective type",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/BrainRegionOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing a brain region",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#node": [
+            {
+              "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+            }
+          ],
+          "https://neuroshapes.org/expectedRootClass": [
+            {
+              "@id": "https://neuroshapes.org/BrainRegion",
+              "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                  "@value": "Brain Region ontology",
+                  "@type": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "https://neuroshapes.org/definingOntology": [
+                {
+                  "@id": "http://bbp.epfl.ch/neurosciencegraph/ontologies/brainregion"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/ActivityTypeOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing an activity type",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ],
+          "http://www.w3.org/ns/shacl#node": [
+            {
+              "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+            }
+          ],
+          "https://neuroshapes.org/expectedRootClass": [
+            {
+              "@id": "http://www.w3.org/ns/prov#Activity",
+              "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                  "@value": "Activity type ontology",
+                  "@type": "http://www.w3.org/2001/XMLSchema#string"
+                }
+              ],
+              "https://neuroshapes.org/definingOntology": [
+                {
+                  "@id": "https://neuroshapes.org/"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/StimulusTypeOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing a stimulus type",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/EcodeOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing an eCode",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/RoleOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing a role",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/LicenseOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing a license",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/SomaTypeTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing the types of somas of the reconstructed cell",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/UnitOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing a unit code",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/LabelingCompoundOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing a labeling compound",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/MorphologicalCellTypeOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing a morphological cell type",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/ElectricalCellTypeOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing an electrical cell type",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/CellLineOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing a cell line",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        },
+        {
+          "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/GeneOntologyTermShape",
+          "@type": [
+            "http://www.w3.org/ns/shacl#NodeShape"
+          ],
+          "http://www.w3.org/ns/shacl#and": [
+            {
+              "@list": [
+                {
+                  "http://www.w3.org/ns/shacl#node": [
+                    {
+                      "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+              "@value": "The shape of an ontology term representing a gene",
+              "@type": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rev": 1,
+  "instant": "2021-01-19T03:48:12.451Z",
+  "subject": {
+    "@type": "Anonymous"
+  },
+  "@type": "SchemaCreated"
+}
