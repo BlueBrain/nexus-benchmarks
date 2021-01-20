@@ -1,7 +1,5 @@
 package ch.epfl.bluebrain.nexus.bench.tests
 
-import java.net.URLEncoder
-
 import cats.effect.{Blocker, ConcurrentEffect}
 import ch.epfl.bluebrain.nexus.bench.BenchConfig
 import ch.epfl.bluebrain.nexus.bench.cli.{Config, Load}
@@ -13,6 +11,8 @@ import io.gatling.http.protocol.HttpProtocolBuilder
 import monix.eval.Task
 import monix.eval.instances.CatsConcurrentEffectForTask
 import monix.execution.Scheduler
+
+import java.net.URLEncoder
 
 abstract class BaseSimulation extends Simulation {
 
@@ -39,7 +39,11 @@ abstract class BaseSimulation extends Simulation {
 
   val encodedSchemaId: String = encode("https://neuroshapes.org/dash/stimulusexperiment")
 
-  val httpProtocol: HttpProtocolBuilder = http.baseUrls(config.env.endpoints)
+  val httpProtocol: HttpProtocolBuilder =
+    config.env.token match {
+      case BenchConfig.Token(value) => http.baseUrls(config.env.endpoints).authorizationHeader(s"Bearer $value")
+      case BenchConfig.NoToken      => http.baseUrls(config.env.endpoints)
+    }
 
   def encode(str: String): String =
     URLEncoder.encode(str, "UTF-8")
