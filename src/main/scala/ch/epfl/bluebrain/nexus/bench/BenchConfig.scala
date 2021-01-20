@@ -2,8 +2,8 @@ package ch.epfl.bluebrain.nexus.bench
 
 import cats.implicits._
 import ch.epfl.bluebrain.nexus.bench.BenchConfig._
-import org.http4s.{AuthScheme, Credentials, Uri}
 import org.http4s.headers.Authorization
+import org.http4s.{AuthScheme, Credentials, Uri}
 import pureconfig.error.{CannotConvert, ConvertFailure}
 import pureconfig.generic.semiauto._
 import pureconfig.syntax._
@@ -44,11 +44,8 @@ object BenchConfig {
       token: TokenConfig,
       endpoint: Uri,
       org: String,
-      alternateEndpoints: Set[Uri] = Set.empty
-  ) {
-    def endpoints: List[String] =
-      (alternateEndpoints + endpoint).map(_.renderString).toList
-  }
+      ipAddresses: Set[String] = Set.empty
+  )
 
   object EnvConfig {
     implicit val uriConfigReader: ConfigReader[Uri] =
