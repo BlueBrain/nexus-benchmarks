@@ -49,7 +49,7 @@ abstract class BaseSimulation extends Simulation:
       scn
         .inject(atOnceUsers(BaseSimulation.intent.users))
         .protocols(httpProtocol)
-    ).maxDuration(BaseSimulation.intent.maxResourceIdx)
+    ).maxDuration(BaseSimulation.intent.duration)
 
 object BaseSimulation:
   import cats.effect.unsafe.IORuntime

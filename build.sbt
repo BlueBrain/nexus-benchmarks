@@ -49,7 +49,7 @@ lazy val munit         = "org.scalameta"        %% "munit"                     %
 
 lazy val benchmarks = project
   .in(file("."))
-  .enablePlugins(BuildInfoPlugin)
+  .enablePlugins(BuildInfoPlugin, JavaAppPackaging)
   .settings(
     buildInfoSettings,
     organization        := "ch.epfl.bluebrain.nexus",
