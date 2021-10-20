@@ -1,0 +1,769 @@
+[
+  {
+    "@id": "https://neuroshapes.org/commons/brainlocation",
+    "@type": [
+      "https://bluebrain.github.io/nexus/vocabulary/Schema"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#string",
+        "@value": "Brain Location Schema"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#imports": [
+      {
+        "@id": "https://neuroshapes.org/commons/quantitativevalue"
+      },
+      {
+        "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm"
+      },
+      {
+        "@id": "https://neuroshapes.org/commons/vector3d"
+      }
+    ],
+    "http://www.w3.org/ns/prov#wasDerivedFrom": [
+      {
+        "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/commons/src/main/resources/schemas/neurosciencegraph/commons/brainlocation/v0.1.1.json"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/constrainedBy": [
+      {
+        "@id": "https://bluebrain.github.io/nexus/schemas/shacl-20170720.ttl"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-02-18T15:59:30.406Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/sy"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/deprecated": [
+      {
+        "@value": false
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/incoming": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/commonshapes:brainlocation/incoming"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/outgoing": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/commonshapes:brainlocation/outgoing"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/project": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/projects/neurosciencegraph/datamodels"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/rev": [
+      {
+        "@value": 68
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/self": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/commonshapes:brainlocation"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+      {
+        "@id": "https://neuroshapes.org/commons/brainlocation/shapes/BrainLocationShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "@type": "http://www.w3.org/2001/XMLSchema#string",
+            "@value": "Brain location shape definition"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#property": [
+          {
+            "http://www.w3.org/ns/shacl#description": [
+              {
+                "@value": "Coordinates in slice"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#maxCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Coordinates in slice"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#node": [
+              {
+                "@id": "https://neuroshapes.org/commons/brainlocation/shapes/CoordinatesInSliceShape",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#NodeShape"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": [
+                  {
+                    "@type": "http://www.w3.org/2001/XMLSchema#string",
+                    "@value": "Coordinates in slice shape definition"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#property": [
+                  {
+                    "http://www.w3.org/ns/shacl#class": [
+                      {
+                        "@id": "https://neuroshapes.org/SpatialReferenceSystem"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Spatial Reference System"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/spatialReferenceSystem"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#float"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Vector value of X"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "X value"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/valueX"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#float"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Vector value of Y"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Y value"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/valueY"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#float"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Vector value of Z"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Z value"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/valueZ"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/coordinatesInSlice"
+              }
+            ]
+          },
+          {
+            "http://www.w3.org/ns/shacl#description": [
+              {
+                "@value": "Coordinates in brain atlas"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#maxCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Coordinates in brain atlas"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#node": [
+              {
+                "@id": "https://neuroshapes.org/commons/brainlocation/shapes/CoordinatesInBrainAtlasShape",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#NodeShape"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": [
+                  {
+                    "@type": "http://www.w3.org/2001/XMLSchema#string",
+                    "@value": "Coordinates in brain atlas shape definition"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#and": [
+                  {
+                    "@list": [
+                      {
+                        "http://www.w3.org/ns/shacl#node": [
+                          {
+                            "@id": "https://neuroshapes.org/commons/vector3d/shapes/Vector3DShape"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/coordinatesInBrainAtlas"
+              }
+            ]
+          },
+          {
+            "http://www.w3.org/ns/shacl#class": [
+              {
+                "@id": "https://neuroshapes.org/AtlasSpatialReferenceSystem"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#maxCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Atlas Spatial Reference System"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/atlasSpatialReferenceSystem"
+              }
+            ]
+          },
+          {
+            "http://www.w3.org/ns/shacl#description": [
+              {
+                "@value": "Distance to boundary"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#maxCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Distance to boundary"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#node": [
+              {
+                "@id": "https://neuroshapes.org/commons/brainlocation/shapes/DistanceToBoundaryShape",
+                "@type": [
+                  "http://www.w3.org/ns/shacl#NodeShape"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": [
+                  {
+                    "@type": "http://www.w3.org/2001/XMLSchema#string",
+                    "@value": "Distance to boundary shape definition"
+                  }
+                ],
+                "http://www.w3.org/ns/shacl#property": [
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Distance"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Distance"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/QuantitativeValueShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "http://schema.org/distance"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Boundary"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/boundary"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/distanceToBoundary"
+              }
+            ]
+          },
+          {
+            "http://www.w3.org/ns/shacl#description": [
+              {
+                "@value": "Brain region region (e.g. layer of the neocortex)"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Brain region layer"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#node": [
+              {
+                "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/BrainRegionOntologyTermShape"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/layer"
+              }
+            ]
+          },
+          {
+            "http://www.w3.org/ns/shacl#in": [
+              {
+                "@list": [
+                  {
+                    "@value": "Dorsal"
+                  },
+                  {
+                    "@value": "Ventral"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#maxCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Longitudinal axis (dorsal / ventral)"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/longitudinalAxis"
+              }
+            ]
+          },
+          {
+            "http://www.w3.org/ns/shacl#description": [
+              {
+                "@value": "Brain region"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Brain region"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#node": [
+              {
+                "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/BrainRegionOntologyTermShape"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/brainRegion"
+              }
+            ]
+          },
+          {
+            "http://www.w3.org/ns/shacl#description": [
+              {
+                "@value": "Position in layer (deep / superficial)"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#in": [
+              {
+                "@list": [
+                  {
+                    "@value": "Deep"
+                  },
+                  {
+                    "@value": "Superficial"
+                  }
+                ]
+              }
+            ],
+            "http://www.w3.org/ns/shacl#maxCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Position in layer"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/positionInLayer"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@id": "https://neuroshapes.org/commons/brainlocation/shapes/CoordinatesInBrainAtlasShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "@type": "http://www.w3.org/2001/XMLSchema#string",
+            "@value": "Coordinates in brain atlas shape definition"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#and": [
+          {
+            "@list": [
+              {
+                "http://www.w3.org/ns/shacl#node": [
+                  {
+                    "@id": "https://neuroshapes.org/commons/vector3d/shapes/Vector3DShape"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@id": "https://neuroshapes.org/commons/brainlocation/shapes/CoordinatesInSliceShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "@type": "http://www.w3.org/2001/XMLSchema#string",
+            "@value": "Coordinates in slice shape definition"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#property": [
+          {
+            "http://www.w3.org/ns/shacl#class": [
+              {
+                "@id": "https://neuroshapes.org/SpatialReferenceSystem"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#maxCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Spatial Reference System"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/spatialReferenceSystem"
+              }
+            ]
+          },
+          {
+            "http://www.w3.org/ns/shacl#datatype": [
+              {
+                "@id": "http://www.w3.org/2001/XMLSchema#float"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#description": [
+              {
+                "@value": "Vector value of X"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#maxCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "X value"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/valueX"
+              }
+            ]
+          },
+          {
+            "http://www.w3.org/ns/shacl#datatype": [
+              {
+                "@id": "http://www.w3.org/2001/XMLSchema#float"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#description": [
+              {
+                "@value": "Vector value of Y"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#maxCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Y value"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/valueY"
+              }
+            ]
+          },
+          {
+            "http://www.w3.org/ns/shacl#datatype": [
+              {
+                "@id": "http://www.w3.org/2001/XMLSchema#float"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#description": [
+              {
+                "@value": "Vector value of Z"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#maxCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Z value"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/valueZ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@id": "https://neuroshapes.org/commons/brainlocation/shapes/DistanceToBoundaryShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "@type": "http://www.w3.org/2001/XMLSchema#string",
+            "@value": "Distance to boundary shape definition"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#property": [
+          {
+            "http://www.w3.org/ns/shacl#description": [
+              {
+                "@value": "Distance"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#maxCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Distance"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#node": [
+              {
+                "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/QuantitativeValueShape"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://schema.org/distance"
+              }
+            ]
+          },
+          {
+            "http://www.w3.org/ns/shacl#maxCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Boundary"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#node": [
+              {
+                "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/boundary"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2021-06-09T08:58:40.141Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/akkaufma"
+      }
+    ]
+  }
+]

@@ -1,49 +1,28 @@
 package ch.epfl.bluebrain.nexus.bench.cli
 
-import cats.implicits._
-import ch.epfl.bluebrain.nexus.bench.BenchConfig.{NoToken, Token, TokenConfig}
-import com.monovore.decline._
-import com.typesafe.config.ConfigValueFactory
-import org.http4s.Uri
-import pureconfig.BasicReaders
+import cats.data.{NonEmptyList, Validated}
+import com.comcast.ip4s.IpAddress
+import com.monovore.decline.*
+import org.http4s.headers.Authorization
+import org.http4s.{AuthScheme, Credentials, Uri}
 
 import scala.concurrent.duration.FiniteDuration
 
-object CliOpts {
-
-  val token: Opts[TokenConfig] = Opts
-    .option[String](
-      long = "token",
-      help = "The token to use when interacting with the Nexus API",
-      short = "t",
-      metavar = "token"
-    )
-    .map(_.trim)
-    .validate("Token must be a non empty string") { _.length > 0 }
-    .map(str => Token(str))
-
-  val noToken: Opts[TokenConfig] = Opts
-    .flag(
-      long = "no-token",
-      help = "Unset a previously set token",
-      short = "n"
-    )
-    .map(_ => NoToken)
+trait CliOpts extends CliArgs:
 
   val endpoint: Opts[Uri] = Opts
-    .option[String](
+    .option[Uri](
       long = "endpoint",
       help = "The base address of the Nexus API",
-      short = "e",
-      metavar = "endpoint"
+      short = "e"
     )
-    .mapValidated { (str: String) =>
-      Uri
-        .fromString(str)
-        .leftMap(_ => s"Invalid Uri: '$str'")
-        .ensure(s"Invalid Uri: '$str'")(uri => uri.scheme.isDefined)
-        .toValidatedNel
-    }
+
+  val token: Opts[Authorization] = Opts
+    .option[Authorization](
+      long = "token",
+      help = "The token to use when interacting with the Nexus API",
+      short = "t"
+    )
 
   val org: Opts[String] = Opts
     .option[String](
@@ -54,53 +33,92 @@ object CliOpts {
     )
     .validate("Invalid organization label")(_.matches("[a-zA-Z0-9]{1,16}"))
 
-  val duration: Opts[FiniteDuration] = Opts
+  val proj: Opts[String] = Opts
     .option[String](
-      long = "test-duration",
-      help = "The test execution duration",
-      short = "d",
-      metavar = "test-duration"
-    )
-    .mapValidated { (str: String) =>
-      BasicReaders.finiteDurationConfigReader
-        .from(ConfigValueFactory.fromAnyRef(str))
-        .leftMap(_ => s"Invalid finite duration value '$str', format: '<long><unit>'")
-        .toValidatedNel
-    }
-
-  val users: Opts[Int] = Opts
-    .option[Int](
-      long = "users",
-      help = "The number of logical threads to be used in tests",
-      short = "u",
-      metavar = "users"
-    )
-    .validate("The users value must be in the interval [1, 200]")(u => u > 0 && u <= 200)
-
-  val project: Opts[String] = Opts
-    .option[String](
-      long = "project",
+      long = "proj",
       help = "The project to be used for running tests",
       short = "p",
       metavar = "project"
     )
     .validate("Invalid project label")(_.matches("[a-zA-Z0-9]{1,16}"))
 
-  val maxResourceIndex: Opts[Int] = Opts
+  val concurrency: Opts[Int] = Opts
     .option[Int](
-      long = "max-resource-index",
-      help = "The maximum resource index to be used for reads when cycling through resources",
-      metavar = "max-resource-index"
+      long = "concurrency",
+      help = "The level of concurrency to use when interacting with the Nexus API",
+      short = "c",
+      metavar = "concurrency"
     )
-    .validate("The max-resource-index value must be in the interval [1, 10000000]")(u => u > 0 && u <= 10000000)
 
-  val startIdx: Opts[Int] = Opts
+  val ipAddresses: Opts[NonEmptyList[IpAddress]] = Opts
+    .options[IpAddress](
+      long = "ip-address",
+      help = "IP address to be used when connecting to the Nexus API instead of the provided endpoint hostname",
+      short = "i"
+    )
+
+  val startIndex: Opts[Int] = Opts
     .option[Int](
       long = "start-index",
-      help = "The resource index to be used as a starting point; the load op will continue from this index.",
+      help = "The resource index to start with (in case a previous execution as aborted)",
       short = "s",
-      metavar = "1 to resource count"
+      metavar = "index"
     )
-    .validate(s"Start index must be a strictly positive integer")(_ > 0)
+    .validate("The start-index value must be a strict positive integer.")(_ > 0)
 
-}
+  val resourceCount: Opts[Int] = Opts
+    .option[Int](
+      long = "total",
+      help = "Total number of resources to inject across all projects",
+      metavar = "resource count"
+    )
+    .validate("The total value must be a strict positive integer.")(_ > 0)
+
+  val projectCount: Opts[Int] = Opts
+    .option[Int](
+      long = "projects",
+      help = "Total number of projects to be created",
+      metavar = "project count"
+    )
+    .validate("The projects value must be a strict positive integer.")(_ > 0)
+
+  val test: Opts[TestName] = Opts
+    .option[String](
+      long = "test",
+      help = s"The name of the test to execute, one of: ${TestName.values.map(_.value).mkString("'", "', '", "'")}",
+      metavar = "test name"
+    )
+    .mapValidated { str =>
+      TestName.values.find(_.value == str) match
+        case Some(tn) => Validated.validNel(tn)
+        case None     =>
+          Validated.invalidNel(
+            s"The name of the test to execute must be one of: ${TestName.values.map(_.value).mkString("'", "', '", "'")}"
+          )
+    }
+
+  val users: Opts[Int] = Opts
+    .option[Int](
+      long = "users",
+      help = "The gatling users configuration, essentially the concurrency level for the test",
+      metavar = "users"
+    )
+
+  val maxResourceIdx: Opts[Int] = Opts
+    .option[Int](
+      long = "max-resource-index",
+      help = "The maximum resource index to be used for read tests",
+      metavar = "max index"
+    )
+    .validate("The max-resource-index value must be a strict positive integer.")(_ > 0)
+
+  val duration: Opts[FiniteDuration] = Opts
+    .option[FiniteDuration](
+      long = "duration",
+      help = "The gatling test duration",
+      metavar = "duration"
+    )
+
+end CliOpts
+
+object CliOpts extends CliOpts
