@@ -18,19 +18,29 @@ object PrepareTestData:
     BlazeClientBuilder[IO].resource.use { client =>
       val api = Api(client, intent.endpoints, intent.token)
       for
-        _       <- api.orgs.ensureExists(intent.organization)
-        _       <- api.projects.ensureExists(intent.organization, "modular")
-        ctx     <- Classpath.loadResourceAsJson("contexts/schema.json")
-        _       <- api.resources.ensureExists(
-                     intent.organization,
-                     "modular",
-                     uri"https://incf.github.io/neuroshapes/contexts/schema.json",
-                     ctx
-                   )
-        schemas <- readSchemasFromClasspath
-        graph    = schemaGraph(schemas)
-        sorted   = topSort(graph)
-        _       <- forceUpdate(api, intent.organization, "modular", schemas, sorted)
+        _                <- api.orgs.ensureExists(intent.organization)
+        _                <- api.projects.ensureExists(intent.organization, "modular")
+        ctx              <- Classpath.loadResourceAsJson("contexts/schema.json")
+        _                <- api.resources.ensureExists(
+                              intent.organization,
+                              "modular",
+                              uri"https://incf.github.io/neuroshapes/contexts/schema.json",
+                              ctx
+                            )
+        schemas          <- readSchemasFromClasspath
+        graph             = schemaGraph(schemas)
+        sorted            = topSort(graph)
+        _                <- forceUpdate(api, intent.organization, "modular", schemas, sorted)
+        assembledSchema  <- Classpath.loadResourceAsJson("schemas/assembled/schema-expanded-framed.json")
+        assembledSchemaid = uri"https://neuroshapes.org/dash/stimulusexperiment"
+        _                <- api.projects.ensureExists(intent.organization, "assembled")
+        _                <- forceUpdate(
+                              api,
+                              intent.organization,
+                              "assembled",
+                              Map(assembledSchemaid -> assembledSchema),
+                              Vector(assembledSchemaid)
+                            )
       yield ExitCode.Success
     }
 
