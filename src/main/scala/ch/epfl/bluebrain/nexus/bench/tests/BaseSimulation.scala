@@ -2,6 +2,7 @@ package ch.epfl.bluebrain.nexus.bench.tests
 
 import ch.epfl.bluebrain.nexus.bench.cli.Intent
 import ch.epfl.bluebrain.nexus.bench.tests.BaseSimulation.intent
+import ch.epfl.bluebrain.nexus.bench.util.Classpath
 import io.circe.Json
 import io.gatling.core.Predef.*
 import io.gatling.core.structure.ScenarioBuilder
@@ -19,6 +20,9 @@ abstract class BaseSimulation extends Simulation:
   val project: String         = BaseSimulation.intent.project
   val encodedResBase: String  = encode("https://nexus-sandbox.io/bench/resource")
   val encodedSchemaId: String = encode("https://neuroshapes.org/dash/stimulusexperiment")
+
+  val resource: Json =
+    Classpath.loadResourceAsJson("data/stimulusexperiment.json").unsafeRunSync()(using BaseSimulation.runtime)
 
   val httpProtocol: HttpProtocolBuilder =
     val withBase = intent.token match

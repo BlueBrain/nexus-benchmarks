@@ -4,7 +4,7 @@ import cats.effect.*
 import cats.effect.unsafe.IORuntime
 import ch.epfl.bluebrain.nexus.bench.cli.Intent
 import ch.epfl.bluebrain.nexus.bench.cli.TestName
-import ch.epfl.bluebrain.nexus.bench.tests.{BaseSimulation, ReadSimulation}
+import ch.epfl.bluebrain.nexus.bench.tests.{BaseSimulation, CreateNoValidationSimulation, ReadSimulation}
 import io.gatling.SimulationRunner
 
 object Test:
@@ -13,5 +13,6 @@ object Test:
     BaseSimulation.intent = test
     BaseSimulation.runtime = rt
     test.test match
-      case TestName.Read => SimulationRunner.run[ReadSimulation]
-      case _             => SimulationRunner.run[ReadSimulation]
+      case TestName.Read               => SimulationRunner.run[ReadSimulation]
+      case TestName.CreateNoValidation => SimulationRunner.run[CreateNoValidationSimulation]
+      case _                           => SimulationRunner.run[ReadSimulation]
