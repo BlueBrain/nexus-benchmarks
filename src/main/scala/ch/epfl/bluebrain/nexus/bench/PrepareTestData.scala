@@ -16,7 +16,7 @@ object PrepareTestData:
 
   def apply(intent: Intent.PrepareTestData): IO[ExitCode] =
     BlazeClientBuilder[IO].resource.use { client =>
-      val api = Api(client, intent.endpoint, intent.token)
+      val api = Api(client, intent.endpoints, intent.token)
       for
         _       <- api.orgs.ensureExists(intent.organization)
         _       <- api.projects.ensureExists(intent.organization, "modular")

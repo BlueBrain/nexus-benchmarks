@@ -8,7 +8,7 @@ import fansi.Str
 
 import scala.annotation.tailrec
 
-class Terminal private(underlying: JTerminal):
+class Terminal private (underlying: JTerminal):
 
   def width: IO[Int] =
     IO.delay(underlying.getWidth)
@@ -30,9 +30,9 @@ class Terminal private(underlying: JTerminal):
             else
               builder.append(head.render).append(' ')
               inner(builder, written + head.length + 1, tail, maxWidth, paddingLength)
-          case _ => builder.toString()
+          case _            => builder.toString()
     width.map { w =>
-      val tokens = tokenize(string)
+      val tokens        = tokenize(string)
       val paddingLength = padding.length
       inner(new StringBuilder, 0, tokens, w, paddingLength)
     }

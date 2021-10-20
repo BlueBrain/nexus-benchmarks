@@ -15,5 +15,4 @@ object Inject:
 
     IO.println(inject).as(ExitCode.Success)
 
-
   def projectFor(index: Int): Int = ???

@@ -24,14 +24,13 @@ object Cli extends CliOpts:
   private val inject =
     Opts.subcommand[Intent.Inject]("inject", "Inject data into the target system") {
       (
-        endpoint,
+        endpoints,
         token.orNone.withDefault(None),
         org.withDefault("org"),
         concurrency.withDefault(10),
         startIndex.withDefault(1),
         resourceCount.withDefault(1000),
-        projectCount.withDefault(10),
-        ipAddresses.orNone
+        projectCount.withDefault(10)
       )
         .mapN[Intent.Inject](Intent.Inject.apply)
         .mapValidated { inject =>
@@ -52,7 +51,7 @@ object Cli extends CliOpts:
   private val prepareTestData =
     Opts.subcommand[Intent.PrepareTestData]("prepare", "Prepare the test organization, projects and schemas") {
       (
-        endpoint,
+        endpoints,
         token.orNone.withDefault(None),
         org.withDefault("org")
       ).mapN[Intent.PrepareTestData](Intent.PrepareTestData.apply)
@@ -61,15 +60,14 @@ object Cli extends CliOpts:
   private val executeTest =
     Opts.subcommand[Intent.Test]("test", "Execute a test") {
       (
-        endpoint,
+        endpoints,
         token.orNone.withDefault(None),
         users,
         org.withDefault("org"),
         proj.withDefault("proj"),
         test,
         maxResourceIdx.withDefault(1000000),
-        duration.withDefault(FiniteDuration(1L, TimeUnit.MINUTES)),
-        ipAddresses.orNone
+        duration.withDefault(FiniteDuration(1L, TimeUnit.MINUTES))
       ).mapN[Intent.Test](Intent.Test.apply)
     }
 

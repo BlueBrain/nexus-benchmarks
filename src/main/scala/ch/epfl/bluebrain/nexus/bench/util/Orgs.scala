@@ -1,6 +1,7 @@
 package ch.epfl.bluebrain.nexus.bench.util
 
 import cats.effect.*
+import cats.data.NonEmptyList
 import ch.epfl.bluebrain.nexus.bench.Err
 import ch.epfl.bluebrain.nexus.bench.util.Api.accept
 import io.circe.*
@@ -11,10 +12,10 @@ import org.http4s.client.dsl.io.*
 import org.http4s.headers.{Accept, Authorization}
 import org.http4s.{AuthScheme, Credentials, EntityDecoder, MediaType, Uri}
 
-class Orgs(client: Client[IO], endpoint: Uri, auth: Option[Authorization]):
+class Orgs(client: Client[IO], endpoints: NonEmptyList[Uri], auth: Option[Authorization]):
 
   def exists(org: String): IO[Boolean] =
-    val uri = endpoint / "orgs" / org
+    val uri = endpoints.head / "orgs" / org
     val req = auth match
       case Some(auth) => GET(uri, auth, Api.accept)
       case None       => GET(uri, Api.accept)
@@ -25,7 +26,7 @@ class Orgs(client: Client[IO], endpoint: Uri, auth: Option[Authorization]):
     }
 
   def create(org: String): IO[Unit] =
-    val uri  = endpoint / "orgs" / org
+    val uri  = endpoints.head / "orgs" / org
     val body = Json.obj()
     val req  = auth match
       case Some(auth) => POST(body, uri, auth, Api.accept)

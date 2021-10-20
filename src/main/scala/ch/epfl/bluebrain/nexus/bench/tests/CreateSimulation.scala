@@ -4,15 +4,15 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
 //noinspection TypeAnnotation
-class CreateNoValidationSimulation extends BaseSimulation:
+class CreateSimulation extends BaseSimulation {
 
   val stringResource = resource.noSpaces
 
-  val scn = scenario("CreateNoValidationSimulation")
+  val scn = scenario("CreateSimulation")
     .forever {
       exec {
         http("createResource")
-          .post(s"/resources/$org/$project/")
+          .post(s"/resources/$org/$project/$encodedSchemaId/")
           .body(StringBody(stringResource))
           .header(HttpHeaderNames.ContentType, HttpHeaderValues.ApplicationJson)
           .check(status.in(201))
@@ -20,3 +20,4 @@ class CreateNoValidationSimulation extends BaseSimulation:
     }
 
   setupSimulation(scn)
+}

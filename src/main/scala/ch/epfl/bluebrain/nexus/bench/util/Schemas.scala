@@ -1,6 +1,7 @@
 package ch.epfl.bluebrain.nexus.bench.util
 
 import cats.effect.*
+import cats.data.NonEmptyList
 import ch.epfl.bluebrain.nexus.bench.Err
 import ch.epfl.bluebrain.nexus.bench.util.Api.accept
 import io.circe.*
@@ -11,10 +12,10 @@ import org.http4s.client.dsl.io.*
 import org.http4s.headers.{Accept, Authorization}
 import org.http4s.{AuthScheme, Credentials, EntityDecoder, MediaType, Uri}
 
-class Schemas(client: Client[IO], endpoint: Uri, auth: Option[Authorization]):
+class Schemas(client: Client[IO], endpoints: NonEmptyList[Uri], auth: Option[Authorization]):
 
   def exists(org: String, proj: String, id: Uri): IO[Boolean] =
-    val uri = endpoint / "schemas" / org / proj / id.renderString
+    val uri = endpoints.head / "schemas" / org / proj / id.renderString
     val req = auth match
       case Some(auth) => GET(uri, auth, Api.accept)
       case None       => GET(uri, Api.accept)
@@ -25,7 +26,7 @@ class Schemas(client: Client[IO], endpoint: Uri, auth: Option[Authorization]):
     }
 
   def create(org: String, proj: String, id: Uri, body: Json): IO[Unit] =
-    val uri = endpoint / "schemas" / org / proj / id.renderString
+    val uri = endpoints.head / "schemas" / org / proj / id.renderString
     val req = auth match
       case Some(auth) => PUT(body, uri, auth, Api.accept)
       case None       => PUT(body, uri, Api.accept)
@@ -38,7 +39,7 @@ class Schemas(client: Client[IO], endpoint: Uri, auth: Option[Authorization]):
     exists(org, proj, id).ifM(IO.unit, create(org, proj, id, body))
 
   def update(org: String, proj: String, id: Uri, rev: Long, body: Json): IO[Unit] =
-    val uri = (endpoint / "schemas" / org / proj / id.renderString).withQueryParam("rev", rev)
+    val uri = (endpoints.head / "schemas" / org / proj / id.renderString).withQueryParam("rev", rev)
     val req = auth match
       case Some(auth) => PUT(body, uri, auth, Api.accept)
       case None       => PUT(body, uri, Api.accept)
@@ -48,7 +49,7 @@ class Schemas(client: Client[IO], endpoint: Uri, auth: Option[Authorization]):
     }
 
   def get(org: String, proj: String, id: Uri): IO[Option[Json]] =
-    val uri = endpoint / "schemas" / org / proj / id.renderString
+    val uri = endpoints.head / "schemas" / org / proj / id.renderString
     val req = auth match
       case Some(auth) => GET(uri, auth, Api.accept)
       case None       => GET(uri, Api.accept)
@@ -69,10 +70,10 @@ class Schemas(client: Client[IO], endpoint: Uri, auth: Option[Authorization]):
     get(org, proj, id).flatMap {
       case Some(value) =>
         value.hcursor.get[Long]("_rev") match
-          case Left(err: DecodingFailure)  =>
+          case Left(err: DecodingFailure) =>
             val msg = s"Failed to decode response when fetching the revision of schema '$org/$proj/${id.renderString}'"
             IO.raiseError(Err.DecodeErr(msg + System.lineSeparator() + err.getMessage))
-          case Right(rev) => IO.pure(Some(rev))
+          case Right(rev)                 => IO.pure(Some(rev))
       case None        =>
         IO.pure(None)
     }

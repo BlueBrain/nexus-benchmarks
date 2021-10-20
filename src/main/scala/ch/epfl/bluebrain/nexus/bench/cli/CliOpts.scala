@@ -10,10 +10,10 @@ import scala.concurrent.duration.FiniteDuration
 
 trait CliOpts extends CliArgs:
 
-  val endpoint: Opts[Uri] = Opts
-    .option[Uri](
+  val endpoints: Opts[NonEmptyList[Uri]] = Opts
+    .options[Uri](
       long = "endpoint",
-      help = "The base address of the Nexus API",
+      help = "The base address(es) of the Nexus API; repeat this argument to shard connections to multiple servers",
       short = "e"
     )
 

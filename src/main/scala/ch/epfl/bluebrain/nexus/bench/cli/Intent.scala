@@ -10,29 +10,27 @@ import scala.deriving.Mirror
 
 enum Intent:
   case PrepareTestData(
-      endpoint: Uri,
+      endpoints: NonEmptyList[Uri],
       token: Option[Authorization],
       organization: String
   )
   case Inject(
-      endpoint: Uri,
+      endpoint: NonEmptyList[Uri],
       token: Option[Authorization],
       organization: String,
       concurrency: Int,
       startIdx: Int,
       resourceCount: Int,
-      projectCount: Int,
-      ipAddresses: Option[NonEmptyList[IpAddress]]
+      projectCount: Int
   )
   case Test(
-      endpoint: Uri,
+      endpoints: NonEmptyList[Uri],
       token: Option[Authorization],
       users: Int,
       organization: String,
       project: String,
       test: TestName,
       maxResourceIdx: Int,
-      duration: FiniteDuration,
-      ipAddresses: Option[NonEmptyList[IpAddress]]
+      duration: FiniteDuration
   )
 end Intent
