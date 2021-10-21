@@ -29,8 +29,8 @@ class Orgs(client: Client[IO], endpoints: NonEmptyList[Uri], auth: Option[Author
     val uri  = endpoints.head / "orgs" / org
     val body = Json.obj()
     val req  = auth match
-      case Some(auth) => POST(body, uri, auth, Api.accept)
-      case None       => POST(body, uri, Api.accept)
+      case Some(auth) => PUT(body, uri, auth, Api.accept)
+      case None       => PUT(body, uri, Api.accept)
     client.run(req).use { resp =>
       if (resp.status.code == 201) IO.unit
       else Api.genericUnexpectedResponseHandler(resp)
