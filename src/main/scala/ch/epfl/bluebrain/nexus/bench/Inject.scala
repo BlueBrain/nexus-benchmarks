@@ -27,7 +27,7 @@ object Inject:
                         Stream
                           .range(inject.startIdx, inject.totalResourceCount)
                           .covary[IO]
-                          .parEvalMap(inject.concurrency) { globalIdx =>
+                          .parEvalMapUnordered(inject.concurrency) { globalIdx =>
                             val projectIdx  = projectIdxFor(inject, globalIdx)
                             val resourceIdx = resourceIdxFor(inject, globalIdx)
                             api.resources
