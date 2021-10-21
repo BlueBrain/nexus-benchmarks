@@ -66,19 +66,19 @@ trait CliOpts extends CliArgs:
     )
     .validate("The start-index value must be a strict positive integer.")(_ > 0)
 
-  val resourceCount: Opts[Int] = Opts
+  val totalResourceCount: Opts[Int] = Opts
     .option[Int](
-      long = "total",
+      long = "total-resource-count",
       help = "Total number of resources to inject across all projects",
-      metavar = "resource count"
+      metavar = "count"
     )
     .validate("The total value must be a strict positive integer.")(_ > 0)
 
-  val projectCount: Opts[Int] = Opts
+  val projectResourceCount: Opts[Int] = Opts
     .option[Int](
-      long = "projects",
-      help = "Total number of projects to be created",
-      metavar = "project count"
+      long = "project-resource-count",
+      help = "Number of resources to be created per project",
+      metavar = "count"
     )
     .validate("The projects value must be a strict positive integer.")(_ > 0)
 

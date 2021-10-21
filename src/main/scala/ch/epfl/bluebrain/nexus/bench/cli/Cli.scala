@@ -29,20 +29,20 @@ object Cli extends CliOpts:
         org.withDefault("org"),
         concurrency.withDefault(10),
         startIndex.withDefault(1),
-        resourceCount.withDefault(1000),
-        projectCount.withDefault(10)
+        totalResourceCount.withDefault(1000),
+        projectResourceCount.withDefault(100)
       )
         .mapN[Intent.Inject](Intent.Inject.apply)
         .mapValidated { inject =>
           val startLowerThanCount   = Validated.condNel(
-            inject.startIdx < inject.resourceCount,
+            inject.startIdx < inject.totalResourceCount,
             inject,
             "The start index must be lower than the total number of resources."
           )
           val projectLowerThanCount = Validated.condNel(
-            inject.projectCount < inject.resourceCount,
+            inject.projectResourceCount < inject.totalResourceCount,
             inject,
-            "The number of projects must be lower than the number of resources."
+            "The number of resources per project must be lower than the total number of resources."
           )
           (startLowerThanCount, projectLowerThanCount).mapN((_, _) => inject)
         }

@@ -15,13 +15,13 @@ enum Intent:
       organization: String
   )
   case Inject(
-      endpoint: NonEmptyList[Uri],
+      endpoints: NonEmptyList[Uri],
       token: Option[Authorization],
       organization: String,
       concurrency: Int,
       startIdx: Int,
-      resourceCount: Int,
-      projectCount: Int
+      totalResourceCount: Int,
+      projectResourceCount: Int
   )
   case Test(
       endpoints: NonEmptyList[Uri],

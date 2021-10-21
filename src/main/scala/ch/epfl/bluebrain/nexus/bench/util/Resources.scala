@@ -31,7 +31,7 @@ class Resources(client: Client[IO], endpoints: NonEmptyList[Uri], auth: Option[A
       case Some(auth) => PUT(body, uri, auth, Api.accept)
       case None       => PUT(body, uri, Api.accept)
     client.run(req).use { resp =>
-      if (resp.status.code == 201) IO.unit
+      if (resp.status.code == 201 || resp.status.code == 409) IO.unit
       else Api.genericUnexpectedResponseHandler(resp)
     }
 
