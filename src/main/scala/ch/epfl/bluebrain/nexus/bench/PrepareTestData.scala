@@ -33,7 +33,7 @@ object PrepareTestData:
         _       <- forceUpdate(api, intent.organization, "modular", schemas, sorted)
         _       <- createTemplateSchemas(api, intent.organization, "modular", intent.templateSchemaCount)
         _       <- api.projects.ensureExists(intent.organization, "assembled")
-        _       <- createAssembledSchemas(api, intent.organization, "modular", intent.templateSchemaCount)
+        _       <- createAssembledSchemas(api, intent.organization, "assembled", intent.templateSchemaCount)
       yield ExitCode.Success
     }
 
