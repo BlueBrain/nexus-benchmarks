@@ -1,0 +1,209 @@
+[
+  {
+    "@id": "https://neuroshapes.org/dash/detailedcircuit",
+    "@type": [
+      "https://bluebrain.github.io/nexus/vocabulary/Schema"
+    ],
+    "http://www.w3.org/2002/07/owl#imports": [
+      {
+        "@id": "https://neuroshapes.org/commons/modelinstance"
+      }
+    ],
+    "http://www.w3.org/ns/prov#wasDerivedFrom": [
+      {
+        "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/simulation/src/main/resources/schemas/neurosciencegraph/simulation/detailedcircuit/v0.1.2.json"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/constrainedBy": [
+      {
+        "@id": "https://bluebrain.github.io/nexus/schemas/shacl-20170720.ttl"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-02-18T20:43:23.026Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/sy"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/deprecated": [
+      {
+        "@value": false
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/incoming": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:detailedcircuit/incoming"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/outgoing": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:detailedcircuit/outgoing"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/project": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/projects/neurosciencegraph/datamodels"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/rev": [
+      {
+        "@value": 32
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/self": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:detailedcircuit"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+      {
+        "@id": "https://neuroshapes.org/dash/detailedcircuit/shapes/DetailedCircuitShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/ns/shacl#and": [
+          {
+            "@list": [
+              {
+                "http://www.w3.org/ns/shacl#node": [
+                  {
+                    "@id": "https://neuroshapes.org/commons/modelinstance/shapes/ModelInstanceShape"
+                  }
+                ]
+              },
+              {
+                "http://www.w3.org/ns/shacl#property": [
+                  {
+                    "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+                      {
+                        "@id": "https://neuroshapes.org/dash/nodecollection/shapes/NodeCollectionShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#class": [
+                      {
+                        "@id": "https://neuroshapes.org/NodeCollection"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Node collection entity."
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Node collection"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/nodeCollection"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+                      {
+                        "@id": "https://neuroshapes.org/dash/edgecollection/shapes/EdgeCollectionShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#class": [
+                      {
+                        "@id": "https://neuroshapes.org/EdgeCollection"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Location of nrn synapse file and additional circuit description files: start.ncs and start.target"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "nrnPath"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/edgeCollection"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+                      {
+                        "@id": "https://neuroshapes.org/dash/target/shapes/TargetShape"
+                      }
+                    ],
+                    "http://www.w3.org/2004/02/skos/core#editorialNote": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#string",
+                        "@value": "constrain with application/bbp-target"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#class": [
+                      {
+                        "@id": "https://neuroshapes.org/Target"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Optional parameter giving location of predefined targets stored in the named file"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "TargetFile"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/target"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#nodeKind": [
+          {
+            "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#targetClass": [
+          {
+            "@id": "https://neuroshapes.org/DetailedCircuit"
+          }
+        ]
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-10-28T10:56:10.329Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/lurie"
+      }
+    ]
+  }
+]

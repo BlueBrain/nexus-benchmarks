@@ -1,0 +1,148 @@
+[
+  {
+    "@id": "https://neuroshapes.org/dash/configuration",
+    "@type": [
+      "https://bluebrain.github.io/nexus/vocabulary/Schema"
+    ],
+    "http://www.w3.org/2002/07/owl#imports": [
+      {
+        "@id": "https://neuroshapes.org/commons/entity"
+      },
+      {
+        "@id": "https://neuroshapes.org/commons/distribution"
+      }
+    ],
+    "http://www.w3.org/ns/prov#wasDerivedFrom": [
+      {
+        "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/simulation/src/main/resources/schemas/neurosciencegraph/simulation/configuration/v1.0.0.json"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/constrainedBy": [
+      {
+        "@id": "https://bluebrain.github.io/nexus/schemas/shacl-20170720.ttl"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-02-18T20:42:26.711Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/sy"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/deprecated": [
+      {
+        "@value": false
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/incoming": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:configuration/incoming"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/outgoing": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:configuration/outgoing"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/project": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/projects/neurosciencegraph/datamodels"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/rev": [
+      {
+        "@value": 33
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/self": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:configuration"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+      {
+        "@id": "https://neuroshapes.org/dash/configuration/shapes/ConfigurationShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "@type": "http://www.w3.org/2001/XMLSchema#string",
+            "@value": "Configuration shape"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#and": [
+          {
+            "@list": [
+              {
+                "http://www.w3.org/ns/shacl#node": [
+                  {
+                    "@id": "https://neuroshapes.org/commons/entity/shapes/EntityShape"
+                  }
+                ]
+              },
+              {
+                "http://www.w3.org/ns/shacl#property": [
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Link to the configuration neurondb.xml file."
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Configuration file (s)"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/distribution/shapes/DistributionShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "http://schema.org/distribution"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#targetClass": [
+          {
+            "@id": "https://neuroshapes.org/Configuration"
+          }
+        ]
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-10-28T10:56:00.636Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/lurie"
+      }
+    ]
+  }
+]

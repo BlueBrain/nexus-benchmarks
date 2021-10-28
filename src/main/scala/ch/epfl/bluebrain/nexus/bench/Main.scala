@@ -1,20 +1,25 @@
 package ch.epfl.bluebrain.nexus.bench
 
-import cats.effect.{Blocker, ConcurrentEffect, ContextShift, ExitCode, Timer}
-import cats.implicits._
-import ch.epfl.bluebrain.nexus.bench.cli.Cli
-import monix.eval.{Task, TaskApp}
+import cats.effect.*
+import ch.epfl.bluebrain.nexus.bench.cli.{Cli, Intent}
 
-object Main extends TaskApp {
+object Main extends IOApp:
 
-  private def runF[F[_]: Timer: ContextShift](args: List[String])(implicit F: ConcurrentEffect[F]): F[ExitCode] =
-    Blocker[F].use { blocker =>
-      Cli[F](blocker, args).recoverWith {
-        case se: BenchError => F.delay(println(se.show)).as(ExitCode.Error)
+  override def run(args: List[String]): IO[ExitCode] =
+    Terminal()
+      .use { terminal =>
+        val io: IO[ExitCode] = Cli.command.parse(args) match
+          case Left(help)    => Cli.printHelp(terminal, help).as(ExitCode.Success)
+          case Right(intent) => evaluate(intent)
+
+        io.handleErrorWith {
+          case e: Err => e.println(terminal).as(ExitCode.Error)
+          case th     => Err.UnknownErr(th).println(terminal).as(ExitCode.Error)
+        }
       }
-    }
 
-  override def run(args: List[String]): Task[ExitCode] =
-    runF[Task](args)
-
-}
+  private def evaluate(intent: Intent): IO[ExitCode] =
+    intent match
+      case value: Intent.Inject          => Inject(value)
+      case value: Intent.PrepareTestData => PrepareTestData(value)
+      case value: Intent.Test            => Test(value)(using runtime)

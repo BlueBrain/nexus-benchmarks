@@ -1,0 +1,529 @@
+[
+  {
+    "@id": "https://neuroshapes.org/commons/subject",
+    "@type": [
+      "https://bluebrain.github.io/nexus/vocabulary/Schema"
+    ],
+    "http://www.w3.org/2002/07/owl#imports": [
+      {
+        "@id": "https://neuroshapes.org/commons/entity"
+      },
+      {
+        "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm"
+      },
+      {
+        "@id": "https://neuroshapes.org/commons/quantitativevalue"
+      }
+    ],
+    "http://www.w3.org/ns/prov#wasDerivedFrom": [
+      {
+        "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/core/src/main/resources/schemas/neurosciencegraph/core/subject/v0.1.0.json"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/constrainedBy": [
+      {
+        "@id": "https://bluebrain.github.io/nexus/schemas/shacl-20170720.ttl"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-02-18T15:59:27.214Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/sy"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/deprecated": [
+      {
+        "@value": false
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/incoming": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/commonshapes:subject/incoming"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/outgoing": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/commonshapes:subject/outgoing"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/project": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/projects/neurosciencegraph/datamodels"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/rev": [
+      {
+        "@value": 40
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/self": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/commonshapes:subject"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+      {
+        "@id": "https://neuroshapes.org/commons/subject/shapes/SubjectShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#comment": [
+          {
+            "@type": "http://www.w3.org/2001/XMLSchema#string",
+            "@value": "Subject used in experiment"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "@type": "http://www.w3.org/2001/XMLSchema#string",
+            "@value": "Subject shape definition"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#and": [
+          {
+            "@list": [
+              {
+                "http://www.w3.org/ns/shacl#node": [
+                  {
+                    "@id": "https://neuroshapes.org/commons/entity/shapes/EntityShape"
+                  }
+                ]
+              },
+              {
+                "http://www.w3.org/ns/shacl#property": [
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "The species of the subject"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Species"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/SpeciesOntologyTermShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/species"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Subject strain"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Strain"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/StrainOntologyTermShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/strain"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Transgenic modification of subject"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Transgenic"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/TransgenicOntologyTermShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/transgenic"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "The sex of the subject"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Sex"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/SexOntologyTermShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/sex"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "The age of the subject."
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Age"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/subject/shapes/AgeShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/age"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#dateTime"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Date of birth of subject."
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#lessThan": [
+                      {
+                        "@id": "http://schema.org/deathDate"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Date of birth"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "http://schema.org/birthDate"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#dateTime"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Date of sacrifice of subject."
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Date of sacrifice"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "http://schema.org/deathDate"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#dateTime"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Date of surgery of subject."
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Date of surgery"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/dateOfSurgery"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Disease modeled in subject."
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Disease"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/DiseaseModelOntologyTermShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/diseaseModel"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Disease of subject."
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Disease"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/DiseaseOntologyTermShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/disease"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Treatment of the subject."
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Treatment"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/typedlabeledontologyterm/shapes/TreatmentOntologyTermShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/treatment"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Weight of the subject."
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Weight"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/QuantitativeValueShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "http://schema.org/weight"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#nodeKind": [
+          {
+            "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+          }
+        ]
+      },
+      {
+        "@id": "https://neuroshapes.org/commons/subject/shapes/AgeShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/ns/shacl#and": [
+          {
+            "@list": [
+              {
+                "http://www.w3.org/ns/shacl#node": [
+                  {
+                    "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/QuantitativeValueShape"
+                  }
+                ]
+              },
+              {
+                "http://www.w3.org/ns/shacl#property": [
+                  {
+                    "http://www.w3.org/ns/shacl#in": [
+                      {
+                        "@list": [
+                          {
+                            "@value": "Pre-natal"
+                          },
+                          {
+                            "@value": "Post-natal"
+                          }
+                        ]
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Period"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/period"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-10-28T10:55:44.524Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/lurie"
+      }
+    ]
+  }
+]

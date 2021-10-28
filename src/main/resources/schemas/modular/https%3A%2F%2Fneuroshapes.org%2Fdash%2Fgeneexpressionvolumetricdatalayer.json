@@ -1,0 +1,148 @@
+[
+  {
+    "@id": "https://neuroshapes.org/dash/geneexpressionvolumetricdatalayer",
+    "@type": [
+      "https://bluebrain.github.io/nexus/vocabulary/Schema"
+    ],
+    "http://www.w3.org/2002/07/owl#imports": [
+      {
+        "@id": "https://neuroshapes.org/dash/volumetricdatalayer"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/constrainedBy": [
+      {
+        "@id": "https://bluebrain.github.io/nexus/schemas/shacl-20170720.ttl"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-10-24T09:15:40.396Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/lurie"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/deprecated": [
+      {
+        "@value": false
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/incoming": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:geneexpressionvolumetricdatalayer/incoming"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/outgoing": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:geneexpressionvolumetricdatalayer/outgoing"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/project": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/projects/neurosciencegraph/datamodels"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/rev": [
+      {
+        "@value": 6
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/self": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:geneexpressionvolumetricdatalayer"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+      {
+        "@id": "https://neuroshapes.org/dash/geneexpressionvolumetricdatalayer/shapes/GeneExpressionVolumetricDataLayerShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "@type": "http://www.w3.org/2001/XMLSchema#string",
+            "@value": "Data shape definition for volumetric brain data that characterizes gene expression"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#and": [
+          {
+            "@list": [
+              {
+                "http://www.w3.org/ns/shacl#node": [
+                  {
+                    "@id": "https://neuroshapes.org/dash/volumetricdatalayer/shapes/VolumetricDataLayer"
+                  }
+                ]
+              },
+              {
+                "http://www.w3.org/ns/shacl#property": [
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Name of the gene being expressed in this volumetric dataset"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Gene"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/labeledontologyentity/shapes/LabeledOntologyEntityShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/gene"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#nodeKind": [
+          {
+            "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#targetClass": [
+          {
+            "@id": "https://neuroshapes.org/VolumetricDataLayer"
+          },
+          {
+            "@id": "https://neuroshapes.org/GeneExpressionVolumetricDataLayer"
+          }
+        ]
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-10-28T10:57:26.127Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/lurie"
+      }
+    ]
+  }
+]

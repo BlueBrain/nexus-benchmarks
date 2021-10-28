@@ -1,0 +1,109 @@
+[
+  {
+    "@id": "https://neuroshapes.org/dash/deformabletransform",
+    "@type": [
+      "https://bluebrain.github.io/nexus/vocabulary/Schema"
+    ],
+    "http://www.w3.org/ns/prov#wasDerivedFrom": [
+      {
+        "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/atlas/src/main/resources/schemas/neurosciencegraph/atlas/deformabletransform/v0.2.0.json"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/constrainedBy": [
+      {
+        "@id": "https://bluebrain.github.io/nexus/schemas/shacl-20170720.ttl"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-02-23T17:22:06.624Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/sy"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/deprecated": [
+      {
+        "@value": false
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/incoming": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:deformabletransform/incoming"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/outgoing": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:deformabletransform/outgoing"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/project": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/projects/neurosciencegraph/datamodels"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/rev": [
+      {
+        "@value": 48
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/self": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:deformabletransform"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+      {
+        "@id": "https://neuroshapes.org/dash/deformabletransform/shapes/DeformableTransformShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/ns/shacl#and": [
+          {
+            "@list": [
+              {
+                "http://www.w3.org/ns/shacl#node": [
+                  {
+                    "@id": "https://neuroshapes.org/dash/transform/shapes/TransformShape"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#description": [
+          {
+            "@value": "Deformable transform including parametric and non-parametric transform, typically described by displacement vector field"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#nodeKind": [
+          {
+            "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#targetClass": [
+          {
+            "@id": "https://neuroshapes.org/DeformableTransform"
+          },
+          {
+            "@id": "https://neuroshapes.org/Transform"
+          }
+        ]
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-10-28T10:57:29.169Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/lurie"
+      }
+    ]
+  }
+]

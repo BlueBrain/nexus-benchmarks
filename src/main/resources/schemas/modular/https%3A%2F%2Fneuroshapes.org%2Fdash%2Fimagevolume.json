@@ -1,0 +1,371 @@
+[
+  {
+    "@id": "https://neuroshapes.org/dash/imagevolume",
+    "@type": [
+      "https://bluebrain.github.io/nexus/vocabulary/Schema"
+    ],
+    "http://www.w3.org/ns/prov#wasDerivedFrom": [
+      {
+        "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/atlas/src/main/resources/schemas/neurosciencegraph/atlas/imagevolume/v1.0.0.json"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/constrainedBy": [
+      {
+        "@id": "https://bluebrain.github.io/nexus/schemas/shacl-20170720.ttl"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-02-23T17:22:08.688Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/sy"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/deprecated": [
+      {
+        "@value": false
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/incoming": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:imagevolume/incoming"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/outgoing": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:imagevolume/outgoing"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/project": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/projects/neurosciencegraph/datamodels"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/rev": [
+      {
+        "@value": 48
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/self": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:imagevolume"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+      {
+        "@id": "https://neuroshapes.org/dash/imagevolume/shapes/ImageVolumeShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "@type": "http://www.w3.org/2001/XMLSchema#string",
+            "@value": "Image volume"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#and": [
+          {
+            "@list": [
+              {
+                "http://www.w3.org/ns/shacl#node": [
+                  {
+                    "@id": "https://neuroshapes.org/commons/transformableobject/shapes/EntityShape"
+                  }
+                ]
+              },
+              {
+                "http://www.w3.org/ns/shacl#property": [
+                  {
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Modality of the image stack"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Image modality"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/imageModality"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Type of the voxel"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Volume type"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/voxelType"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Dimension of the 3D volume in voxel"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Volume Dimension"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/vector3d/shapes/Vector3DShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/volumeDimension"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Resolution of the voxel"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Voxel resolution"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/dash/imagevolume/shapes/VoxelResolutionShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/voxelResolution"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Origin of the image volume"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Image Origin"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/vector3d/shapes/Vector3DShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/imageOrigin"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Direction of the image volume represented as a rotational matrix"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Image direction"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/vector3d/shapes/RotationalMatrixShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/imageDirection"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#nodeKind": [
+          {
+            "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#targetClass": [
+          {
+            "@id": "https://neuroshapes.org/ImageVolume"
+          }
+        ]
+      },
+      {
+        "@id": "https://neuroshapes.org/dash/imagevolume/shapes/VoxelResolutionShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/ns/shacl#and": [
+          {
+            "@list": [
+              {
+                "http://www.w3.org/ns/shacl#node": [
+                  {
+                    "@id": "https://neuroshapes.org/commons/quantitativevalue/shapes/QuantitativeValueShape"
+                  }
+                ]
+              },
+              {
+                "http://www.w3.org/ns/shacl#property": [
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Voxel resolution value"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Voxel resolution value"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/vector3d/shapes/Vector3DShape"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "http://schema.org/value"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#targetObjectsOf": [
+          {
+            "@id": "https://neuroshapes.org/voxelResolution"
+          }
+        ]
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-10-28T10:57:33.998Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/lurie"
+      }
+    ]
+  }
+]

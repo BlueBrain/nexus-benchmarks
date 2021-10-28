@@ -1,0 +1,201 @@
+[
+  {
+    "@id": "https://neuroshapes.org/dash/edgecollection",
+    "@type": [
+      "https://bluebrain.github.io/nexus/vocabulary/Schema"
+    ],
+    "http://www.w3.org/2002/07/owl#imports": [
+      {
+        "@id": "https://neuroshapes.org/commons/entity"
+      }
+    ],
+    "http://www.w3.org/ns/prov#wasDerivedFrom": [
+      {
+        "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/simulation/src/main/resources/schemas/neurosciencegraph/simulation/edgecollection/v0.1.2.json"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/constrainedBy": [
+      {
+        "@id": "https://bluebrain.github.io/nexus/schemas/shacl-20170720.ttl"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-02-18T20:44:52.198Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/sy"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/deprecated": [
+      {
+        "@value": false
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/incoming": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:edgecollection/incoming"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/outgoing": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:edgecollection/outgoing"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/project": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/projects/neurosciencegraph/datamodels"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/rev": [
+      {
+        "@value": 30
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/self": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/datashapes:edgecollection"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+      {
+        "@id": "https://neuroshapes.org/dash/edgecollection/shapes/EdgeCollectionShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#comment": [
+          {
+            "@type": "http://www.w3.org/2001/XMLSchema#string",
+            "@value": " Elements of the collection defined like Location of nrn synapse file and additional circuit description files: start.ncs and start.target"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "@type": "http://www.w3.org/2001/XMLSchema#string",
+            "@value": " Elements of the collection defined like Location of nrn synapse file and additional circuit description files: start.ncs and start.target"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#and": [
+          {
+            "@list": [
+              {
+                "http://www.w3.org/ns/shacl#node": [
+                  {
+                    "@id": "https://neuroshapes.org/commons/entity/shapes/EntityShape"
+                  }
+                ]
+              },
+              {
+                "http://www.w3.org/ns/shacl#property": [
+                  {
+                    "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/entity/shapes/EntityShape"
+                      }
+                    ],
+                    "http://www.w3.org/2004/02/skos/core#editorialNote": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#string",
+                        "@value": "Add media type constraint: application/nrn."
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#class": [
+                      {
+                        "@id": "http://www.w3.org/ns/prov#Entity"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Collection of nrn files or syn2."
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Properties"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/edgePopulation"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+                      {
+                        "@id": "https://neuroshapes.org/dash/synapserelease/shapes/SynapseReleaseShape"
+                      }
+                    ],
+                    "http://www.w3.org/2004/02/skos/core#editorialNote": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#string",
+                        "@value": "Add media type constraint: application/neuron-mod."
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#class": [
+                      {
+                        "@id": "https://neuroshapes.org/SynapseRelease"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "Collection of synapse mod files identified by git hash."
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Synapse release"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "https://neuroshapes.org/synapseRelease"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#targetClass": [
+          {
+            "@id": "https://neuroshapes.org/EdgeCollection"
+          }
+        ]
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-10-28T10:56:26.067Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/lurie"
+      }
+    ]
+  }
+]

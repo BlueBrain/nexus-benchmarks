@@ -4,12 +4,18 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
 //noinspection TypeAnnotation
-class ReadSimulation extends BaseSimulation {
+class ReadSimulation extends BaseSimulation:
 
   val random = new java.util.Random()
 
-  private def resourceId =
-    s"/resources/$org/$project/$encodedSchemaId/${encodedResBase}${random.nextInt(config.test.maxResourceIndex)}"
+  private def randIdx =
+    val value = random.nextInt(BaseSimulation.intent.maxProjectIdx + 1)
+    if (value == 0) 1
+    else value
+
+  private def randProject  = s"proj$randIdx"
+  private def randResource = s"${encodedResBase}${random.nextInt(BaseSimulation.intent.maxResourceIdx)}"
+  private def resourceId   = s"/resources/$org/$randProject/_/$randResource"
 
   val scn = scenario("ReadSimulation")
     .forever {
@@ -21,4 +27,3 @@ class ReadSimulation extends BaseSimulation {
     }
 
   setupSimulation(scn)
-}

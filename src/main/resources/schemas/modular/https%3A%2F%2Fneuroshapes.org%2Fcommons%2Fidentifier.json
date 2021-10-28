@@ -1,0 +1,344 @@
+[
+  {
+    "@id": "https://neuroshapes.org/commons/identifier",
+    "@type": [
+      "https://bluebrain.github.io/nexus/vocabulary/Schema"
+    ],
+    "http://www.w3.org/2002/07/owl#imports": [
+      {
+        "@id": "https://neuroshapes.org/commons/propertyvalue"
+      }
+    ],
+    "http://www.w3.org/ns/prov#wasDerivedFrom": [
+      {
+        "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/commons/src/main/resources/schemas/neurosciencegraph/commons/identifier/v0.2.1.json"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/constrainedBy": [
+      {
+        "@id": "https://bluebrain.github.io/nexus/schemas/shacl-20170720.ttl"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-02-18T14:47:26.709Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/sy"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/deprecated": [
+      {
+        "@value": false
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/incoming": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/commonshapes:identifier/incoming"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/outgoing": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/commonshapes:identifier/outgoing"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/project": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/projects/neurosciencegraph/datamodels"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/rev": [
+      {
+        "@value": 116
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/self": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/commonshapes:identifier"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+      {
+        "@id": "https://neuroshapes.org/commons/identifier/shapes/IdentifierShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/ns/shacl#property": [
+          {
+            "@id": "https://neuroshapes.org/commons/identifier/shapes/WithIdentifierPropertyShape",
+            "http://www.w3.org/ns/shacl#description": [
+              {
+                "@value": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs."
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Identifier"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://schema.org/identifier"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#xone": [
+              {
+                "@list": [
+                  {
+                    "http://www.w3.org/ns/shacl#nodeKind": [
+                      {
+                        "@id": "http://www.w3.org/ns/shacl#IRI"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#datatype": [
+                      {
+                        "@id": "http://www.w3.org/2001/XMLSchema#string"
+                      }
+                    ]
+                  },
+                  {
+                    "http://www.w3.org/ns/shacl#node": [
+                      {
+                        "@id": "https://neuroshapes.org/commons/propertyvalue/shapes/PropertyValueShape"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "@id": "https://neuroshapes.org/commons/identifier/shapes/WithStructuredIdentifierShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#PropertyShape"
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "@type": "http://www.w3.org/2001/XMLSchema#string",
+            "@value": "Key value type of identifier."
+          }
+        ],
+        "http://www.w3.org/ns/shacl#node": [
+          {
+            "@id": "https://neuroshapes.org/commons/propertyvalue/shapes/PropertyValueShape"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#nodeKind": [
+          {
+            "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#path": [
+          {
+            "@id": "http://schema.org/identifier"
+          }
+        ]
+      },
+      {
+        "@id": "https://neuroshapes.org/commons/identifier/shapes/WithOrcidIdentifierPropertyShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#PropertyShape"
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "@type": "http://www.w3.org/2001/XMLSchema#string",
+            "@value": "A shape for an ORCID based researcher identifier."
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "@id": "https://support.orcid.org/knowledgebase/articles/116780-structure-of-the-orcid-identifier"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#and": [
+          {
+            "@list": [
+              {
+                "http://www.w3.org/ns/shacl#node": [
+                  {
+                    "@id": "https://neuroshapes.org/commons/propertyvalue/shapes/PropertyValueShape"
+                  }
+                ]
+              },
+              {
+                "http://www.w3.org/ns/shacl#or": [
+                  {
+                    "@list": [
+                      {
+                        "http://www.w3.org/ns/shacl#property": [
+                          {
+                            "http://www.w3.org/ns/shacl#datatype": [
+                              {
+                                "@id": "http://www.w3.org/2001/XMLSchema#string"
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#description": [
+                              {
+                                "@value": "The property name."
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#hasValue": [
+                              {
+                                "@value": "http//orcid.org"
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#maxCount": [
+                              {
+                                "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                                "@value": 1
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#name": [
+                              {
+                                "@value": "Orcid ID"
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#path": [
+                              {
+                                "@id": "http://schema.org/propertyID"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "http://www.w3.org/ns/shacl#property": [
+                          {
+                            "http://www.w3.org/ns/shacl#datatype": [
+                              {
+                                "@id": "http://www.w3.org/2001/XMLSchema#string"
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#description": [
+                              {
+                                "@value": "The property name."
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#hasValue": [
+                              {
+                                "@value": "orcid"
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#maxCount": [
+                              {
+                                "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                                "@value": 1
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#name": [
+                              {
+                                "@value": "Orcid ID"
+                              }
+                            ],
+                            "http://www.w3.org/ns/shacl#path": [
+                              {
+                                "@id": "http://schema.org/name"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "http://www.w3.org/ns/shacl#property": [
+                  {
+                    "http://www.w3.org/ns/shacl#description": [
+                      {
+                        "@value": "The orcid identifier"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#maxCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "Orcid"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#nodeKind": [
+                      {
+                        "@id": "http://www.w3.org/ns/shacl#IRI"
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "http://schema.org/value"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/shacl#nodeKind": [
+          {
+            "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#path": [
+          {
+            "@id": "http://schema.org/identifier"
+          }
+        ]
+      },
+      {
+        "@id": "https://neuroshapes.org/commons/identifier/shapes/WithGridIdentifierPropertyShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#PropertyShape"
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "@type": "http://www.w3.org/2001/XMLSchema#string",
+            "@value": "A shape for GRID (https://www.grid.ac) based organization identifier."
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "@id": "https://www.grid.ac"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#path": [
+          {
+            "@id": "http://schema.org/identifier"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#pattern": [
+          {
+            "@value": "^(https://www.grid.ac)"
+          }
+        ]
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-11-11T14:16:03.207Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/lurie"
+      }
+    ]
+  }
+]

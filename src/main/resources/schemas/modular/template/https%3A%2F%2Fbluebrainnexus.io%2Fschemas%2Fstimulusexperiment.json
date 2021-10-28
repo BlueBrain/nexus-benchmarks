@@ -1,0 +1,17 @@
+[
+  {
+    "@type": [
+      "https://bluebrain.github.io/nexus/vocabulary/Schema"
+    ],
+    "http://www.w3.org/2002/07/owl#imports": [
+      {
+        "@id": "https://neuroshapes.org/dash/stimulusexperiment"
+      }
+    ],
+    "http://www.w3.org/ns/prov#wasDerivedFrom": [
+      {
+        "@value": "https://neuroshapes.org/dash/stimulusexperiment"
+      }
+    ]
+  }
+]

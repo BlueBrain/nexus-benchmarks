@@ -4,7 +4,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
 //noinspection TypeAnnotation
-class CreateNoValidationSimulation extends BaseSimulation {
+class CreateNoValidationSimulation extends BaseSimulation:
 
   val stringResource = resource.noSpaces
 
@@ -20,4 +20,3 @@ class CreateNoValidationSimulation extends BaseSimulation {
     }
 
   setupSimulation(scn)
-}

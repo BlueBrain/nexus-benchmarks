@@ -1,0 +1,164 @@
+[
+  {
+    "@id": "https://neuroshapes.org/commons/boundingbox",
+    "@type": [
+      "https://bluebrain.github.io/nexus/vocabulary/Schema"
+    ],
+    "http://www.w3.org/2002/07/owl#imports": [
+      {
+        "@id": "https://neuroshapes.org/commons/vector3d"
+      },
+      {
+        "@id": "https://neuroshapes.org/commons/unit"
+      }
+    ],
+    "http://www.w3.org/ns/prov#wasDerivedFrom": [
+      {
+        "@value": "https://github.com/INCF/neuroshapes/blob/v0.3.15/modules/atlas/src/main/resources/schemas/neurosciencegraph/atlas/boundingbox/v0.2.0.json"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/constrainedBy": [
+      {
+        "@id": "https://bluebrain.github.io/nexus/schemas/shacl-20170720.ttl"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-03-18T16:15:38.049Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/createdBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/sy"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/deprecated": [
+      {
+        "@value": false
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/incoming": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/commonshapes:boundingbox/incoming"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/outgoing": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/commonshapes:boundingbox/outgoing"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/project": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/projects/neurosciencegraph/datamodels"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/rev": [
+      {
+        "@value": 15
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/self": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/schemas/neurosciencegraph/datamodels/commonshapes:boundingbox"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/shapes": [
+      {
+        "@id": "https://neuroshapes.org/commons/boundingbox/shapes/BoundingBoxShape",
+        "@type": [
+          "http://www.w3.org/ns/shacl#NodeShape"
+        ],
+        "http://www.w3.org/ns/shacl#nodeKind": [
+          {
+            "@id": "http://www.w3.org/ns/shacl#BlankNodeOrIRI"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#property": [
+          {
+            "http://www.w3.org/ns/shacl#description": [
+              {
+                "@value": "The first row in the matrix"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#maxCount": [
+              {
+                "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "First Row"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#node": [
+              {
+                "@id": "https://neuroshapes.org/commons/vector3d/shapes/Vector3DShape"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/upperPoint"
+              }
+            ]
+          },
+          {
+            "http://www.w3.org/ns/shacl#description": [
+              {
+                "@value": "The second row in the matrix"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#maxCount": [
+              {
+                "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@type": "http://www.w3.org/2001/XMLSchema#integer",
+                "@value": 1
+              }
+            ],
+            "http://www.w3.org/ns/shacl#name": [
+              {
+                "@value": "Second Row"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#node": [
+              {
+                "@id": "https://neuroshapes.org/commons/vector3d/shapes/Vector3DShape"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "https://neuroshapes.org/lowerPoint"
+              }
+            ]
+          },
+          {
+            "@id": "https://neuroshapes.org/commons/unit/shapes/WithUnitCodeShape"
+          }
+        ]
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2019-10-28T10:57:31.426Z"
+      }
+    ],
+    "https://bluebrain.github.io/nexus/vocabulary/updatedBy": [
+      {
+        "@id": "https://staging.nexus.ocp.bbp.epfl.ch/v1/realms/bbp/users/lurie"
+      }
+    ]
+  }
+]
