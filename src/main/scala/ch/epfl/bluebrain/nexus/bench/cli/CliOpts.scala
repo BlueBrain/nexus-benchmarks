@@ -112,6 +112,14 @@ trait CliOpts extends CliArgs:
     )
     .validate("The max-resource-index value must be a strict positive integer.")(_ > 0)
 
+  val maxProjectIdx: Opts[Int] = Opts
+    .option[Int](
+      long = "max-project-index",
+      help = "The maximum project index to be used for read tests",
+      metavar = "max index"
+    )
+    .validate("The max-project-index value must be a strict positive integer.")(_ > 0)
+
   val duration: Opts[FiniteDuration] = Opts
     .option[FiniteDuration](
       long = "duration",

@@ -8,8 +8,9 @@ class ReadSimulation extends BaseSimulation:
 
   val random = new java.util.Random()
 
-  private def resourceId =
-    s"/resources/$org/$project/_/${encodedResBase}${random.nextInt(BaseSimulation.intent.maxResourceIdx - 1) + 1}"
+  private def randProject  = s"proj${random.nextInt(BaseSimulation.intent.maxProjectIdx - 1) + 1}"
+  private def randResource = s"${encodedResBase}${random.nextInt(BaseSimulation.intent.maxResourceIdx - 1) + 1}"
+  private def resourceId   = s"/resources/$org/$randProject/_/$randResource"
 
   val scn = scenario("ReadSimulation")
     .forever {

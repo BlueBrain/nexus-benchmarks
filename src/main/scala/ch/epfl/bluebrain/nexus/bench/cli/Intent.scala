@@ -30,6 +30,7 @@ enum Intent:
       users: Int,
       organization: String,
       project: String,
+      maxProjectIdx: Int,
       test: TestName,
       maxResourceIdx: Int,
       maxTemplateSchemaIdx: Int,

@@ -66,6 +66,7 @@ object Cli extends CliOpts:
         users,
         org.withDefault("org"),
         proj.withDefault("proj"),
+        maxProjectIdx.withDefault(1),
         test,
         maxResourceIdx.withDefault(1000000),
         maxTemplateSchemaIdx.withDefault(10),
