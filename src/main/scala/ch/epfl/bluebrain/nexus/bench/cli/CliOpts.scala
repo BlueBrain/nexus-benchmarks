@@ -119,6 +119,22 @@ trait CliOpts extends CliArgs:
       metavar = "duration"
     )
 
+  val templateSchemaCount: Opts[Int] = Opts
+    .option[Int](
+      long = "template-schemas",
+      help = "How many test schemas should be created from the template",
+      metavar = "count"
+    )
+    .validate("The template-schemas value must be a strict positive integer.")(_ > 0)
+
+  val maxTemplateSchemaIdx: Opts[Int] = Opts
+    .option[Int](
+      long = "max-template-schema-index",
+      help = "The template schema index to be used for create tests",
+      metavar = "max index"
+    )
+    .validate("The max-template-schema-index value must be a strict positive integer.")(_ > 0)
+
 end CliOpts
 
 object CliOpts extends CliOpts

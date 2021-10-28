@@ -40,13 +40,6 @@ lazy val jlineTerminal = "org.jline"             % "jline-terminal"            %
 lazy val logback       = "ch.qos.logback"        % "logback-classic"           % logbackVersion
 lazy val munit         = "org.scalameta"        %% "munit"                     % munitVersion
 
-//lazy val circeGeneric  = "io.circe"              %% "circe-generic"            % circeVersion
-//lazy val circeLiteral  = "io.circe"              %% "circe-literal"            % circeVersion
-//lazy val http4sCirce   = "org.http4s"            %% "http4s-circe"             % http4sVersion
-//lazy val kindProjector = "org.typelevel"         %% "kind-projector"           % kindProjectorVersion
-//lazy val monixEval     = "io.monix"              %% "monix-eval"               % monixVersion
-//lazy val monixTail     = "io.monix"              %% "monix-tail"               % monixVersion
-
 lazy val benchmarks = project
   .in(file("."))
   .enablePlugins(BuildInfoPlugin, JavaAppPackaging)
@@ -75,19 +68,6 @@ lazy val benchmarks = project
       jlineTerminal,
       logback,
       munit % Test
-      /*
-      catsCore,
-      circeCore,
-      circeGeneric,
-      circeLiteral,
-      circeParser,
-      decline,
-      http4sCirce,
-      http4sClient,
-      logback,
-      monixEval,
-      pureconfig
-       */
     )
   )
 
@@ -103,7 +83,7 @@ lazy val buildInfoSettings = Seq(
   },
   schemaIdx        := {
     val parent = (Compile / resourceDirectory).value
-    val pf     = (parent / "schemas" / "modular") ** "*.json"
+    val pf     = (parent / "schemas" / "modular") * "*.json"
     pf.get().map(_.getName)
   },
   buildInfoKeys    := Seq[BuildInfoKey](version, cliName, schemaIdx),

@@ -53,7 +53,8 @@ object Cli extends CliOpts:
       (
         endpoints,
         token.orNone.withDefault(None),
-        org.withDefault("org")
+        org.withDefault("org"),
+        templateSchemaCount.withDefault(10)
       ).mapN[Intent.PrepareTestData](Intent.PrepareTestData.apply)
     }
 
@@ -67,6 +68,7 @@ object Cli extends CliOpts:
         proj.withDefault("proj"),
         test,
         maxResourceIdx.withDefault(1000000),
+        maxTemplateSchemaIdx.withDefault(10),
         duration.withDefault(FiniteDuration(1L, TimeUnit.MINUTES))
       ).mapN[Intent.Test](Intent.Test.apply)
     }

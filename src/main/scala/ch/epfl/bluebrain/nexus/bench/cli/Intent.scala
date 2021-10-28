@@ -12,7 +12,8 @@ enum Intent:
   case PrepareTestData(
       endpoints: NonEmptyList[Uri],
       token: Option[Authorization],
-      organization: String
+      organization: String,
+      templateSchemaCount: Int
   )
   case Inject(
       endpoints: NonEmptyList[Uri],
@@ -31,6 +32,7 @@ enum Intent:
       project: String,
       test: TestName,
       maxResourceIdx: Int,
+      maxTemplateSchemaIdx: Int,
       duration: FiniteDuration
   )
 end Intent

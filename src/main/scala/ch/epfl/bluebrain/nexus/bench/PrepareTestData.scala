@@ -41,6 +41,7 @@ object PrepareTestData:
                               Map(assembledSchemaid -> assembledSchema),
                               Vector(assembledSchemaid)
                             )
+        _                <- createTemplateSchemas(api, intent.organization, "modular", intent.templateSchemaCount)
       yield ExitCode.Success
     }
 
@@ -89,15 +90,29 @@ object PrepareTestData:
 
   private def forceUpdate(api: Api, org: String, proj: String, schemas: Map[Uri, Json], ord: Vector[Uri]): IO[Unit] =
     ord.traverse { id =>
-      api.schemas.revisionOf(org, proj, id).flatMap {
-        case Some(rev) =>
-          IO.println(s"Update schema: $id (rev $rev)") >>
-            api.schemas.update(org, proj, id, rev, schemas(id))
-        case None      =>
-          IO.println(s"Create schema: $id") >>
-            api.schemas.create(org, proj, id, schemas(id))
-      }
+      upsertSchema(api, org, proj, id, schemas(id))
     }.void
+
+  private def upsertSchema(api: Api, org: String, proj: String, id: Uri, json: Json): IO[Unit] =
+    api.schemas.revisionOf(org, proj, id).flatMap {
+      case Some(rev) =>
+        IO.println(s"Update schema: $id (rev $rev)") >> api.schemas.update(org, proj, id, rev, json)
+      case None      =>
+        IO.println(s"Create schema: $id") >> api.schemas.create(org, proj, id, json)
+    }
+
+  private def createTemplateSchemas(api: Api, org: String, proj: String, count: Int): IO[Unit] =
+    Classpath
+      .loadResourceAsJson(
+        "schemas/modular/template/https%3A%2F%2Fbluebrainnexus.io%2Fschemas%2Fstimulusexperiment.json"
+      )
+      .flatMap { json =>
+        (1 to count).toList.traverse { idx =>
+          val id = Uri.unsafeFromString(s"https://bluebrainnexus.io/schemas/stimulusexperiment$idx")
+          upsertSchema(api, org, proj, id, json)
+        }
+      }
+      .void
 
   given Decoder[Uri] =
     Decoder.decodeString.emap { str =>

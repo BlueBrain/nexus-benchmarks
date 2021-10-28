@@ -16,9 +16,9 @@ import scala.util.Random
 
 class Resources(client: Client[IO], endpoints: NonEmptyList[Uri], auth: Option[Authorization]):
 
-  private val random = Random()
+  private val random          = Random()
   private val endpointsVector = endpoints.toList.toVector
-  private val endpointsSize = endpointsVector.size
+  private val endpointsSize   = endpointsVector.size
 
   def oneEndpoint: Uri =
     endpointsVector(random.nextInt(endpointsSize))

@@ -15,11 +15,11 @@ import java.net.URLEncoder
 
 abstract class BaseSimulation extends Simulation:
 
-  val base: List[String]      = BaseSimulation.intent.endpoints.toList.map(_.renderString)
-  val org: String             = BaseSimulation.intent.organization
-  val project: String         = BaseSimulation.intent.project
-  val encodedResBase: String  = encode("https://nexus-sandbox.io/bench/resource")
-  val encodedSchemaId: String = encode("https://neuroshapes.org/dash/stimulusexperiment")
+  val base: List[String]          = BaseSimulation.intent.endpoints.toList.map(_.renderString)
+  val org: String                 = BaseSimulation.intent.organization
+  val project: String             = BaseSimulation.intent.project
+  val encodedResBase: String      = encode("https://nexus-sandbox.io/bench/resource")
+  val encodedSchemaIdBase: String = encode("https://bluebrainnexus.io/schemas/stimulusexperiment")
 
   val resource: Json =
     Classpath.loadResourceAsJson("data/stimulusexperiment.json").unsafeRunSync()(using BaseSimulation.runtime)
