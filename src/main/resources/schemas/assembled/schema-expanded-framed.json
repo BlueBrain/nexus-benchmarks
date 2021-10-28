@@ -1,5 +1,4 @@
 {
-  "@id": "https://neuroshapes.org/dash/stimulusexperiment",
   "@type": [
     "https://bluebrain.github.io/nexus/vocabulary/Schema"
   ],

@@ -18,30 +18,22 @@ object PrepareTestData:
     BlazeClientBuilder[IO].resource.use { client =>
       val api = Api(client, intent.endpoints, intent.token)
       for
-        _                <- api.orgs.ensureExists(intent.organization)
-        _                <- api.projects.ensureExists(intent.organization, "modular")
-        ctx              <- Classpath.loadResourceAsJson("contexts/schema.json")
-        _                <- api.resources.ensureExists(
-                              intent.organization,
-                              "modular",
-                              uri"https://incf.github.io/neuroshapes/contexts/schema.json",
-                              ctx
-                            )
-        schemas          <- readSchemasFromClasspath
-        graph             = schemaGraph(schemas)
-        sorted            = topSort(graph)
-        _                <- forceUpdate(api, intent.organization, "modular", schemas, sorted)
-        assembledSchema  <- Classpath.loadResourceAsJson("schemas/assembled/schema-expanded-framed.json")
-        assembledSchemaid = uri"https://neuroshapes.org/dash/stimulusexperiment"
-        _                <- api.projects.ensureExists(intent.organization, "assembled")
-        _                <- forceUpdate(
-                              api,
-                              intent.organization,
-                              "assembled",
-                              Map(assembledSchemaid -> assembledSchema),
-                              Vector(assembledSchemaid)
-                            )
-        _                <- createTemplateSchemas(api, intent.organization, "modular", intent.templateSchemaCount)
+        _       <- api.orgs.ensureExists(intent.organization)
+        _       <- api.projects.ensureExists(intent.organization, "modular")
+        ctx     <- Classpath.loadResourceAsJson("contexts/schema.json")
+        _       <- api.resources.ensureExists(
+                     intent.organization,
+                     "modular",
+                     uri"https://incf.github.io/neuroshapes/contexts/schema.json",
+                     ctx
+                   )
+        schemas <- readSchemasFromClasspath
+        graph    = schemaGraph(schemas)
+        sorted   = topSort(graph)
+        _       <- forceUpdate(api, intent.organization, "modular", schemas, sorted)
+        _       <- createTemplateSchemas(api, intent.organization, "modular", intent.templateSchemaCount)
+        _       <- api.projects.ensureExists(intent.organization, "assembled")
+        _       <- createAssembledSchemas(api, intent.organization, "modular", intent.templateSchemaCount)
       yield ExitCode.Success
     }
 
@@ -106,6 +98,17 @@ object PrepareTestData:
       .loadResourceAsJson(
         "schemas/modular/template/https%3A%2F%2Fbluebrainnexus.io%2Fschemas%2Fstimulusexperiment.json"
       )
+      .flatMap { json =>
+        (1 to count).toList.traverse { idx =>
+          val id = Uri.unsafeFromString(s"https://bluebrainnexus.io/schemas/stimulusexperiment$idx")
+          upsertSchema(api, org, proj, id, json)
+        }
+      }
+      .void
+
+  private def createAssembledSchemas(api: Api, org: String, proj: String, count: Int): IO[Unit] =
+    Classpath
+      .loadResourceAsJson("schemas/assembled/schema-expanded-framed.json")
       .flatMap { json =>
         (1 to count).toList.traverse { idx =>
           val id = Uri.unsafeFromString(s"https://bluebrainnexus.io/schemas/stimulusexperiment$idx")
